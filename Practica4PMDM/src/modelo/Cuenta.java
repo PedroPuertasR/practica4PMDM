@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import controlador.ESaldoNoValido;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Random;
 
@@ -12,7 +14,7 @@ import java.util.Random;
  *
  * @author alumno
  */
-public class Cuenta implements Fecha{
+public class Cuenta implements Fecha, Serializable{
     
     private int numero;
     private transient String titular;
@@ -23,7 +25,8 @@ public class Cuenta implements Fecha{
     public Cuenta() {
     }
     
-    public Cuenta(String titular, double saldo, double saldoMinimo, Calendar fecha) {
+    public Cuenta(String titular, double saldo, double saldoMinimo, Calendar fecha) throws ESaldoNoValido {
+        controlSaldo();
         this.numero = generarAleatorio(100, 1);
         this.titular = titular;
         this.saldo = saldo;
@@ -89,7 +92,7 @@ public class Cuenta implements Fecha{
 
     @Override
     public int dia() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -100,6 +103,13 @@ public class Cuenta implements Fecha{
     @Override
     public int año() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void controlSaldo() throws ESaldoNoValido{
+        if(saldo < saldoMinimo){
+            throw new ESaldoNoValido("El saldo " + this.saldo + " €, no debe ser menor que "
+                    + "el saldo mínimo < " + this.saldoMinimo +  "€.");
+        }
     }
     
 }
