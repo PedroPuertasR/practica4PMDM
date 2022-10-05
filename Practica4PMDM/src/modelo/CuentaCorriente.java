@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import controlador.ESaldoNoValido;
 import java.util.Calendar;
 
 /**
@@ -13,25 +14,25 @@ import java.util.Calendar;
  */
 public class CuentaCorriente extends Cuenta{
     
-    private double mantenimiento;
-    private String tipoComision;
+    private double comisionMantenimiento;
+    private String tipoComision; // Se calcula semetral o anual
 
-    public CuentaCorriente(double mantenimiento, String tipoComision, String titular, double saldo, double saldoMinimo, Calendar fecha) {
+    public CuentaCorriente(double comisionMantenimiento, String tipoComision, String titular, double saldo, double saldoMinimo, Calendar fecha) throws ESaldoNoValido {
         super(titular, saldo, saldoMinimo, fecha);
-        this.mantenimiento = mantenimiento;
+        this.comisionMantenimiento = comisionMantenimiento;
         this.tipoComision = tipoComision;
     }
 
-    public double getMantenimiento() {
-        return mantenimiento;
+    public double getComisionMantenimiento() {
+        return comisionMantenimiento;
     }
 
     public String getTipoComision() {
         return tipoComision;
     }
 
-    public void setMantenimiento(double mantenimiento) {
-        this.mantenimiento = mantenimiento;
+    public void setComisionMantenimiento(double comisionMantenimiento) {
+        this.comisionMantenimiento = comisionMantenimiento;
     }
 
     public void setTipoComision(String tipoComision) {
@@ -40,7 +41,7 @@ public class CuentaCorriente extends Cuenta{
 
     @Override
     public String toString() {
-        return super.toString() + "mantenimiento=" + mantenimiento + ", tipoComision=" + tipoComision + '}';
+        return super.toString() + "comisionMantenimiento=" + comisionMantenimiento + ", tipoComision=" + tipoComision + '}';
     }
     
     

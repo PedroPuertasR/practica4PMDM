@@ -5,12 +5,45 @@
  */
 package modelo;
 
+import controlador.ESaldoNoValido;
+import java.util.Calendar;
+
 /**
  *
  * @author alumno
  */
 public class CuentaInversion extends Cuenta{
     
-    private int beneficio;
+    private float beneficio; // 10% positivo o negativo del saldo y se calcula trimestral
+    private double totalInvertido;
+
+    public CuentaInversion(float beneficio, double totalInvertido, String titular, double saldo, double saldoMinimo, Calendar fecha) throws ESaldoNoValido {
+        super(titular, saldo, saldoMinimo, fecha);
+        this.beneficio = beneficio;
+        this.totalInvertido = totalInvertido;
+    }
+
+    public float getBeneficio() {
+        return beneficio;
+    }
+
+    public void setBeneficio(float beneficio) {
+        this.beneficio = beneficio;
+    }
+
+    public double getTotalInvertido() {
+        return totalInvertido;
+    }
+
+    public void setTotalInvertido(double totalInvertido) {
+        this.totalInvertido = totalInvertido;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "beneficio=" + beneficio + ", totalInvertido=" + totalInvertido + '}';
+    }
+    
+    
     
 }

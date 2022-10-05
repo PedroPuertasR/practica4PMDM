@@ -27,8 +27,8 @@ public class Cuenta implements Fecha, Serializable{
     
     public Cuenta(String titular, double saldo, double saldoMinimo, Calendar fecha) throws ESaldoNoValido {
         controlSaldo();
-        this.numero = generarAleatorio(100, 1);
-        this.titular = titular;
+        this.numero = generarAleatorio(1000, 1);
+        this.titular = titular; // Debe ser alfanumerico y trascient o no serializable
         this.saldo = saldo;
         this.saldoMinimo = saldoMinimo;
         this.fecha = fecha;
@@ -76,7 +76,7 @@ public class Cuenta implements Fecha, Serializable{
 
     @Override
     public String toString() {
-        return "Cuenta{" + "numero=" + numero + ", titular=" + titular + ", saldo=" + saldo + ", fecha=" + fecha + '}';
+        return "Cuenta{" + "numero=" + numero + ", titular=" + titular + ", saldo=" + saldo + '}';
     }
     
     //Métodos
