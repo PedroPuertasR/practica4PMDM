@@ -12,20 +12,22 @@ import java.util.Random;
  *
  * @author alumno
  */
-public class Cuenta {
+public class Cuenta implements Fecha{
     
     private int numero;
     private transient String titular;
     private double saldo;
+    private double saldoMinimo;
     private Calendar fecha;
 
     public Cuenta() {
     }
     
-    public Cuenta(String titular, double saldo, Calendar fecha) {
+    public Cuenta(String titular, double saldo, double saldoMinimo, Calendar fecha) {
         this.numero = generarAleatorio(100, 1);
         this.titular = titular;
         this.saldo = saldo;
+        this.saldoMinimo = saldoMinimo;
         this.fecha = fecha;
     }
 
@@ -45,6 +47,14 @@ public class Cuenta {
         return fecha;
     }
 
+    public double getSaldoMinimo() {
+        return saldoMinimo;
+    }
+
+    public void setSaldoMinimo(double saldoMinimo) {
+        this.saldoMinimo = saldoMinimo;
+    }
+    
     public void setNumero(int numero) {
         this.numero = numero;
     }
@@ -75,6 +85,21 @@ public class Cuenta {
         num = aleatorio.nextInt(max - min + 1) + min;
         
         return num;
+    }
+
+    @Override
+    public int dia() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int mes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int año() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

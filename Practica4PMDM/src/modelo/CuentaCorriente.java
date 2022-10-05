@@ -16,8 +16,8 @@ public class CuentaCorriente extends Cuenta{
     private double mantenimiento;
     private String tipoComision;
 
-    public CuentaCorriente(double mantenimiento, String tipoComision, String titular, double saldo, Calendar fecha) {
-        super(titular, saldo, fecha);
+    public CuentaCorriente(double mantenimiento, String tipoComision, String titular, double saldo, double saldoMinimo, Calendar fecha) {
+        super(titular, saldo, saldoMinimo, fecha);
         this.mantenimiento = mantenimiento;
         this.tipoComision = tipoComision;
     }

@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import java.util.Calendar;
+
 /**
  *
  * @author alumno
@@ -14,7 +16,7 @@ public interface Fecha {
     public final static int MES_DEL_ANIO = Calendar.MONTH;
     public final static int ANIO = Calendar.YEAR;
     
-    public abstract int día();
+    public abstract int dia();
     public abstract int mes();
     public abstract int año();
 }
