@@ -14,10 +14,10 @@ import java.util.Calendar;
  */
 public class CuentaCorriente extends Cuenta{
     
-    private double comisionMantenimiento;
+    private float comisionMantenimiento;
     private String tipoComision; // Se calcula semetral o anual
 
-    public CuentaCorriente(double comisionMantenimiento, String tipoComision, String titular, double saldo, double saldoMinimo, Calendar fecha) throws ESaldoNoValido {
+    public CuentaCorriente(float comisionMantenimiento, String tipoComision, String titular, double saldo, double saldoMinimo, Calendar fecha) throws ESaldoNoValido {
         super(titular, saldo, saldoMinimo, fecha);
         this.comisionMantenimiento = comisionMantenimiento;
         this.tipoComision = tipoComision;
@@ -31,7 +31,7 @@ public class CuentaCorriente extends Cuenta{
         return tipoComision;
     }
 
-    public void setComisionMantenimiento(double comisionMantenimiento) {
+    public void setComisionMantenimiento(float comisionMantenimiento) {
         this.comisionMantenimiento = comisionMantenimiento;
     }
 

@@ -16,7 +16,8 @@ public interface Fecha {
     public final static int MES_DEL_ANIO = Calendar.MONTH;
     public final static int ANIO = Calendar.YEAR;
     
-    public abstract int dia();
-    public abstract int mes();
-    public abstract int año();
+    public abstract boolean mes();
+    public abstract boolean trimestre();
+    public abstract boolean semestre();
+    public abstract boolean año();
 }

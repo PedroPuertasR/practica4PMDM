@@ -14,21 +14,21 @@ import java.util.Calendar;
  */
 public class CuentaAhorro extends Cuenta{
     
-    private double interesAnual; // Expresado en %
+    private double interesMensual; // Expresado en %
     private boolean bloqueada;
 
     public CuentaAhorro(double interesAnual, boolean bloqueada, String titular, double saldo, double saldoMinimo, Calendar fecha) throws ESaldoNoValido {
         super(titular, saldo, saldoMinimo, fecha);
-        this.interesAnual = interesAnual;
+        this.interesMensual = interesAnual;
         this.bloqueada = bloqueada;
     }
 
-    public double getInteresAnual() {
-        return interesAnual;
+    public double getInteresMensual() {
+        return interesMensual;
     }
 
-    public void setInteresAnual(double interesAnual) {
-        this.interesAnual = interesAnual;
+    public void setInteresMensual(double interesMensual) {
+        this.interesMensual = interesMensual;
     }
 
     public boolean isBloqueada() {
@@ -41,7 +41,7 @@ public class CuentaAhorro extends Cuenta{
 
     @Override
     public String toString() {
-        return super.toString() + "interesAnual=" + interesAnual + ", bloqueada=" + bloqueada + '}';
+        return super.toString() + "interesAnual=" + interesMensual + ", bloqueada=" + bloqueada + '}';
     }
     
     
