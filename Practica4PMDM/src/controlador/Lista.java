@@ -26,6 +26,14 @@ public class Lista <T>{
         
     }
     
+    public Nodo[] getArrayNodos() {
+        return arrayNodos;
+    }
+
+    public void setArrayNodos(Nodo[] arrayNodos) {
+        this.arrayNodos = arrayNodos;
+    }
+    
 //    public void moveForward(){
 //        //This method move de current pointer to the next node of the list.
 //        if (actual.getSig() != null)
