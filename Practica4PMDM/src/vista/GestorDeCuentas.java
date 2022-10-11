@@ -15,6 +15,7 @@ public class GestorDeCuentas extends javax.swing.JFrame {
 
     private Lista listaNodo;
     private NuevaCuenta panelNuevaCuenta;
+    private Visualiza1a1 panelVisualiza1a1;
     /**
      * Creates new form GestorDeCuentas
      */
@@ -86,6 +87,11 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         jMenu1.add(jMenuItemJList);
 
         jMenuItemUnoAUno.setText("Visualiza 1 a 1");
+        jMenuItemUnoAUno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemUnoAUnoActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItemUnoAUno);
 
         jMenuBar1.add(jMenu1);
@@ -124,6 +130,15 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         panelNuevaCuenta.vaciarTextFields();
         panelNuevaCuenta.modificaLabels(evt);
     }//GEN-LAST:event_nuevaCuentaActionPerformed
+
+    private void jMenuItemUnoAUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUnoAUnoActionPerformed
+        if(panelVisualiza1a1 == null) {
+            panelVisualiza1a1 = new Visualiza1a1(listaNodo);
+            setContentPane(panelVisualiza1a1);
+        } else {
+            panelVisualiza1a1.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItemUnoAUnoActionPerformed
 
     /**
      * @param args the command line arguments

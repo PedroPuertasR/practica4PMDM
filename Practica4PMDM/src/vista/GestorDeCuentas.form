@@ -57,6 +57,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Visualiza 1 a 1"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemUnoAUnoActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

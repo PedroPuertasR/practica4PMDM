@@ -8,11 +8,8 @@ package vista;
 import controlador.ESaldoNoValido;
 import controlador.Lista;
 import java.awt.event.ActionEvent;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Cuenta;
@@ -177,6 +174,7 @@ public class NuevaCuenta extends javax.swing.JPanel {
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         crearCuenta();
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
 
@@ -206,7 +204,6 @@ public class NuevaCuenta extends javax.swing.JPanel {
             jLabelTipo1.setText("Comision mantenimiento");
             jLabelTipo2.setText("Tipo comision");
         }
-        
     }
 
     public void vaciarTextFields() {
