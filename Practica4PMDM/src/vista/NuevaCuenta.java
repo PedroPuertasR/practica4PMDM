@@ -5,8 +5,19 @@
 
 package vista;
 
+import controlador.ESaldoNoValido;
+import controlador.Lista;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modelo.Cuenta;
+import modelo.CuentaAhorro;
+import modelo.CuentaCorriente;
 
 /**
  *
@@ -14,9 +25,14 @@ import java.awt.event.MouseEvent;
  */
 public class NuevaCuenta extends javax.swing.JPanel {
 
+    private Calendar fecha;
+    private SimpleDateFormat sdf;
+    private Lista listaNodo;
+    
     /** Creates new form NuevaCuenta */
-    public NuevaCuenta() {
+    public NuevaCuenta(Lista listanodo) {
         initComponents();
+        listaNodo = listanodo;
     }
 
     /** This method is called from within the constructor to
@@ -28,22 +44,20 @@ public class NuevaCuenta extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelNumero = new javax.swing.JLabel();
         jLabelTitular = new javax.swing.JLabel();
         jLabelSaldoActual = new javax.swing.JLabel();
         jLabelSaldoMinimo = new javax.swing.JLabel();
         jLabelFecha = new javax.swing.JLabel();
         jLabelTipo1 = new javax.swing.JLabel();
         jLabelTipo2 = new javax.swing.JLabel();
-        jTextFieldNumero = new javax.swing.JTextField();
         jTextFieldTitular = new javax.swing.JTextField();
         jTextFieldSaldoActual = new javax.swing.JTextField();
         jTextFieldSaldoMinimo = new javax.swing.JTextField();
         jTextFieldFecha = new javax.swing.JTextField();
         jTextFieldTipo1 = new javax.swing.JTextField();
         jTextFieldTipo2 = new javax.swing.JTextField();
-
-        jLabelNumero.setText("Numero");
+        jButtonGuardar = new javax.swing.JButton();
+        jButtonVolver = new javax.swing.JButton();
 
         jLabelTitular.setText("Titular");
 
@@ -57,8 +71,6 @@ public class NuevaCuenta extends javax.swing.JPanel {
 
         jLabelTipo2.setText("Tipo 2");
 
-        jTextFieldNumero.setText("jTextField1");
-
         jTextFieldTitular.setText("jTextField2");
 
         jTextFieldSaldoActual.setText("jTextField3");
@@ -71,6 +83,20 @@ public class NuevaCuenta extends javax.swing.JPanel {
 
         jTextFieldTipo2.setText("jTextField7");
 
+        jButtonGuardar.setText("Guardar");
+        jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGuardarActionPerformed(evt);
+            }
+        });
+
+        jButtonVolver.setText("Volver");
+        jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,10 +104,6 @@ public class NuevaCuenta extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelTipo2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextFieldTipo2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelTipo1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -103,19 +125,21 @@ public class NuevaCuenta extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextFieldTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelNumero)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelTipo2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(jButtonGuardar)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonVolver)
+                            .addComponent(jTextFieldTipo2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(69, 69, 69))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNumero)
-                    .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTitular)
                     .addComponent(jTextFieldTitular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -139,21 +163,33 @@ public class NuevaCuenta extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTipo2)
                     .addComponent(jTextFieldTipo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonGuardar)
+                    .addComponent(jButtonVolver))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonVolverActionPerformed
+
+    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
+        crearCuenta();
+    }//GEN-LAST:event_jButtonGuardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonGuardar;
+    private javax.swing.JButton jButtonVolver;
     private javax.swing.JLabel jLabelFecha;
-    private javax.swing.JLabel jLabelNumero;
     private javax.swing.JLabel jLabelSaldoActual;
     private javax.swing.JLabel jLabelSaldoMinimo;
     private javax.swing.JLabel jLabelTipo1;
     private javax.swing.JLabel jLabelTipo2;
     private javax.swing.JLabel jLabelTitular;
     private javax.swing.JTextField jTextFieldFecha;
-    private javax.swing.JTextField jTextFieldNumero;
     private javax.swing.JTextField jTextFieldSaldoActual;
     private javax.swing.JTextField jTextFieldSaldoMinimo;
     private javax.swing.JTextField jTextFieldTipo1;
@@ -162,9 +198,9 @@ public class NuevaCuenta extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public void modificaLabels(ActionEvent evt) {
-        //System.out.println(evt.getSource().);
-        if(evt.getSource() == "jMenuItemAhorro") {
-            jLabelTipo1.setText("Interes Anual");
+        // System.out.println(evt.getSource().toString());
+        if(evt.getSource().toString().contains("text=Ahorro")) {
+            jLabelTipo1.setText("Interes Mensual");
             jLabelTipo2.setText("Bloqueada");
         } else {
             jLabelTipo1.setText("Comision mantenimiento");
@@ -174,12 +210,46 @@ public class NuevaCuenta extends javax.swing.JPanel {
     }
 
     public void vaciarTextFields() {
-        jTextFieldFecha.setText("");
-        jTextFieldNumero.setText("");
+        fecha = Calendar.getInstance();
+        sdf = new SimpleDateFormat("dd-MM-yyyy");
+        jTextFieldFecha.setText("" + sdf.format(fecha.getTime()));
         jTextFieldSaldoActual.setText("");
         jTextFieldSaldoMinimo.setText("");
         jTextFieldTipo1.setText("");
         jTextFieldTipo2.setText("");
         jTextFieldTitular.setText("");
+        jTextFieldFecha.setEditable(false);
+    }
+
+    private void crearCuenta() {
+        
+        Cuenta c = null;
+        if("Interes Mensual".equals(jLabelTipo1.getText())) {
+            try {
+                c = new CuentaAhorro(
+                        Double.parseDouble(jTextFieldTipo1.getText()),
+                        Boolean.parseBoolean(jTextFieldTipo2.getText()),
+                        jTextFieldTitular.getText(),
+                        Double.parseDouble(jTextFieldSaldoActual.getText()),
+                        Double.parseDouble(jTextFieldSaldoMinimo.getText()),
+                        Calendar.getInstance());
+            } catch (ESaldoNoValido ex) {
+                Logger.getLogger(NuevaCuenta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                c = new CuentaCorriente(
+                        Float.parseFloat(jTextFieldTipo1.getText()),
+                        jTextFieldTipo2.getText(),
+                        jTextFieldTitular.getText(),
+                        Double.parseDouble(jTextFieldSaldoActual.getText()),
+                        Double.parseDouble(jTextFieldSaldoMinimo.getText()),
+                        Calendar.getInstance());
+            } catch (ESaldoNoValido ex) {
+                Logger.getLogger(NuevaCuenta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        listaNodo.insertar(c.getNumero(), c);
     }
 }

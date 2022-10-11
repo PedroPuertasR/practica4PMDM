@@ -21,18 +21,17 @@ public class Cuenta implements Fecha, Serializable {
     private double saldo;
     private double saldoMinimo;
     private Calendar fecha;
-    public static Calendar fechaHoy = Calendar.getInstance();
 
     public Cuenta() {
     }
 
     public Cuenta(String titular, double saldo, double saldoMinimo, Calendar fecha) throws ESaldoNoValido {
-        controlSaldo();
         this.numero = generarAleatorio(1000, 1);
         this.titular = titular; // Debe ser alfanumerico y trascient o no serializable
         this.saldo = saldo;
         this.saldoMinimo = saldoMinimo;
         this.fecha = fecha;
+        controlSaldo();
     }
 
     public int getNumero() {
@@ -92,6 +91,7 @@ public class Cuenta implements Fecha, Serializable {
 
     public void controlSaldo() throws ESaldoNoValido {
         if (saldo < saldoMinimo) {
+            // throw new ESaldoNoValido();
             throw new ESaldoNoValido("El saldo " + this.saldo + " €, no debe ser menor que "
                     + "el saldo mínimo < " + this.saldoMinimo + "€.");
         }
@@ -100,7 +100,7 @@ public class Cuenta implements Fecha, Serializable {
     @Override
     public boolean mes() {
 
-        if (fecha.get(DIA_DEL_MES) == fechaHoy.get(DIA_DEL_MES)) {
+        if (fecha.get(DIA_DEL_MES) == Fecha.DIA_DEL_MES) {
             return true;
 
         } else {
@@ -110,7 +110,7 @@ public class Cuenta implements Fecha, Serializable {
 
     @Override
     public boolean trimestre() {
-        if (fechaHoy.get(MES_DEL_ANIO) >= (fecha.get(MES_DEL_ANIO)) + 3) {
+        if (Fecha.MES_DEL_ANIO >= (fecha.get(MES_DEL_ANIO)) + 3) {
             return true;
         } else {
             return false;
@@ -120,7 +120,7 @@ public class Cuenta implements Fecha, Serializable {
 
     @Override
     public boolean semestre() {
-        if (fechaHoy.get(MES_DEL_ANIO) >= (fecha.get(MES_DEL_ANIO)) + 6) {
+        if (Fecha.MES_DEL_ANIO >= (fecha.get(MES_DEL_ANIO)) + 6) {
             return true;
         } else {
             return false;
@@ -130,7 +130,7 @@ public class Cuenta implements Fecha, Serializable {
 
     @Override
     public boolean año() {
-        if (fechaHoy.get(ANIO) > (fecha.get(ANIO))) {
+        if (Fecha.ANIO > (fecha.get(ANIO))) {
             return true;
         } else {
             return false;

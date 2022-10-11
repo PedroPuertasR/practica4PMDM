@@ -35,7 +35,15 @@
                     <Property name="text" type="java.lang.String" value="Ahorro"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAhorroActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nuevaCuentaActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCorriente">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Corriente"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nuevaCuentaActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>

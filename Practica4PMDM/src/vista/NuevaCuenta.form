@@ -19,11 +19,6 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jLabelTipo2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jTextFieldTipo2" min="-2" pref="100" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabelTipo1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
@@ -50,9 +45,18 @@
                       <Component id="jTextFieldTitular" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jLabelNumero" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelTipo2" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="jButtonGuardar" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jTextFieldNumero" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jButtonVolver" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldTipo2" min="-2" pref="100" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
@@ -62,12 +66,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabelNumero" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldNumero" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelTitular" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldTitular" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -97,17 +96,17 @@
                   <Component id="jLabelTipo2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldTipo2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="42" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonVolver" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="89" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabelNumero">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Numero"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabelTitular">
       <Properties>
         <Property name="text" type="java.lang.String" value="Titular"/>
@@ -136,11 +135,6 @@
     <Component class="javax.swing.JLabel" name="jLabelTipo2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tipo 2"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldNumero">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldTitular">
@@ -172,6 +166,22 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="jTextField7"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonGuardar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Guardar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonGuardarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonVolver">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Volver"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonVolverActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

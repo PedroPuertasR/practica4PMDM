@@ -5,6 +5,9 @@
  */
 package controlador;
 
+import java.awt.Window;
+import javax.accessibility.AccessibleRole;
+
 /**
  *
  * @author alumno
