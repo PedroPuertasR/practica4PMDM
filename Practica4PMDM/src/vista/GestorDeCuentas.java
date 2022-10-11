@@ -38,7 +38,6 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         jMenuItemGuarda = new javax.swing.JMenuItem();
         jMenuNuevaCuenta = new javax.swing.JMenu();
         jMenuItemAhorro = new javax.swing.JMenuItem();
-        jMenuItemCorriente = new javax.swing.JMenuItem();
         jMenuItemJList = new javax.swing.JMenuItem();
         jMenuItemUnoAUno = new javax.swing.JMenuItem();
 
@@ -72,14 +71,6 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         });
         jMenuNuevaCuenta.add(jMenuItemAhorro);
 
-        jMenuItemCorriente.setText("Corriente");
-        jMenuItemCorriente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCorrienteActionPerformed(evt);
-            }
-        });
-        jMenuNuevaCuenta.add(jMenuItemCorriente);
-
         jMenu1.add(jMenuNuevaCuenta);
 
         jMenuItemJList.setText("Visualiza JList");
@@ -100,7 +91,7 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 478, Short.MAX_VALUE)
         );
 
         pack();
@@ -115,15 +106,17 @@ public class GestorDeCuentas extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemGuardaActionPerformed
 
     private void jMenuItemAhorroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAhorroActionPerformed
-        if(panelNuevaCuenta == null)
-            panelNuevaCuenta = new NuevaCuenta(evt);
-        setContentPane(panelNuevaCuenta);
+        // TODO add your handling code here:
+        if(panelNuevaCuenta == null) {
+            panelNuevaCuenta = new NuevaCuenta();
+            setContentPane(panelNuevaCuenta);
+            this.repaint();
+        } else {
+            panelNuevaCuenta.setVisible(true);
+            panelNuevaCuenta.modificaLabels(evt);
+        }
+        panelNuevaCuenta.vaciarTextFields();
     }//GEN-LAST:event_jMenuItemAhorroActionPerformed
-
-    private void jMenuItemCorrienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCorrienteActionPerformed
-        NuevaCuenta panelNuevaCuenta = new NuevaCuenta(evt);
-        setContentPane(panelNuevaCuenta);
-    }//GEN-LAST:event_jMenuItemCorrienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,7 +158,6 @@ public class GestorDeCuentas extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemAhorro;
     private javax.swing.JMenuItem jMenuItemCarga;
-    private javax.swing.JMenuItem jMenuItemCorriente;
     private javax.swing.JMenuItem jMenuItemGuarda;
     private javax.swing.JMenuItem jMenuItemJList;
     private javax.swing.JMenuItem jMenuItemUnoAUno;

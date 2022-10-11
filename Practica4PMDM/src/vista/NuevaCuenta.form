@@ -18,44 +18,44 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabelTipo2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jTextFieldTipo2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldTipo2" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="jLabelTipo1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jTextFieldTipo1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldTipo1" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="jLabelFecha" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jTextFieldFecha" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldFecha" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="jLabelSaldoMinimo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="108" max="32767" attributes="0"/>
-                      <Component id="jTextFieldSaldoMinimo" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldSaldoMinimo" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="jLabelSaldoActual" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jTextFieldSaldoActual" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldSaldoActual" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="jLabelTitular" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jTextFieldTitular" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldTitular" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabelNumero" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jTextFieldNumero" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldNumero" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
