@@ -4,8 +4,13 @@
  */
 package vista;
 
+import controlador.ComparadorNumCuenta;
 import controlador.GestionFicheros;
 import controlador.Lista;
+import controlador.Nodo;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -16,11 +21,14 @@ public class GestorDeCuentas extends javax.swing.JFrame {
     private Lista listaNodo;
     private NuevaCuenta panelNuevaCuenta;
     private Visualiza1a1 panelVisualiza1a1;
+    private List <Nodo> listaCopia;
     /**
      * Creates new form GestorDeCuentas
      */
     public GestorDeCuentas() {
         listaNodo = new Lista(100);
+        copiarLista();
+        //ordenarLista(listaCopia);
         initComponents();
     }
 
@@ -140,6 +148,18 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemUnoAUnoActionPerformed
 
+    public void copiarLista(){
+        listaCopia = new ArrayList <Nodo>();
+        
+        for(int i = 0; i < listaNodo.getArrayNodos().length; i++){
+            listaCopia.add(listaNodo.getArrayNodos()[i]);
+        }
+    }
+    
+    public void ordenarLista(List <Nodo> lista){
+        Collections.sort(lista, new ComparadorNumCuenta());
+    }
+    
     /**
      * @param args the command line arguments
      */
