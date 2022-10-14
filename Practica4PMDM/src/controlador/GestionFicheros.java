@@ -42,7 +42,7 @@ public class GestionFicheros{
         } catch (IOException ex) {
             System.out.println("Error al escribir los datos");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GestionFicheros.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error: Clase no encontrada");
         }
     }
     
@@ -54,16 +54,18 @@ public class GestionFicheros{
         
         try {
             // Instancio los flujos
+            System.out.println("hola1");
             flujoSalidaFichero = new FileOutputStream(System.getProperty("user.dir")+ "\\cuentas.dat");
+            System.out.println("hola2");
             flujoEscritura = new ObjectOutputStream(flujoSalidaFichero);
-            
+            System.out.println("hola3");
             flujoEscritura.writeObject(arrayNodos);
+            System.out.println("hola4");
             //Cerramos flujo
             flujoEscritura.close();
             flujoSalidaFichero.close();
-        } catch (Exception e) {
-            System.out.println(" Error cerrar flujo"+e.getMessage());
-        } finally {
+        } catch (IOException ex) {
+            Logger.getLogger(GestionFicheros.class.getName()).log(Level.SEVERE, null, ex);
         }
     }// Fin crear fichero
     
