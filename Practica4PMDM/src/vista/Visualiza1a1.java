@@ -199,17 +199,14 @@ public class Visualiza1a1 extends javax.swing.JPanel {
 
     private void jButtonAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnteriorActionPerformed
         posicion--;
-        if (posicion == 0)
-            jButtonAnterior.setEnabled(false);
-        jButtonSiguiente.setEnabled(true);
-        mostrarCuenta(listaNodo.getArrayNodos());
+        comprobarBotones();
+        mostrarCuenta(listaNodo.getArrayNodos()[posicion]);
     }//GEN-LAST:event_jButtonAnteriorActionPerformed
 
     private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteActionPerformed
         posicion++;
-        if (posicion == listaNodo.getArrayNodos().length)
-            jButtonSiguiente.setEnabled(false);
-        jButtonAnterior.setEnabled(true);
+        comprobarBotones();
+        mostrarCuenta(listaNodo.getArrayNodos()[posicion]);
     }//GEN-LAST:event_jButtonSiguienteActionPerformed
 
 
@@ -234,8 +231,7 @@ public class Visualiza1a1 extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void camposNoEditables() {
-        // Inicialmente los botones calcular y anterior estaran deshabilitados
-        jButtonAnterior.setEnabled(false);
+        // Inicialmente los botones calcular estara deshabilitado
         jButtonCalcular.setEnabled(false);
         
         jTextFieldFecha.setEditable(false);
@@ -258,7 +254,28 @@ public class Visualiza1a1 extends javax.swing.JPanel {
         }
     }
 
-    private void mostrarCuenta(Nodo[] arrayNodos) {
-        // Metodo que muestra el nodo del array en el que nos encontramos
+    private void mostrarCuenta(Nodo nodo) {
+        System.out.println(nodo.getTypo().toString());
+        
+        Cuenta c = (Cuenta)nodo.getTypo();
+        jTextFieldFecha.setText(c.getFecha()+"");
+        jTextFieldNumeroCuenta.setText(c.getNumero()+"");
+        jTextFieldSaldoActual.setText(c.getSaldo()+"");
+        jTextFieldSaldoMinimo.setText(c.getSaldoMinimo()+"");
+        jTextFieldTipo1.setText("");
+        jTextFieldTipo2.setText("");
+        jTextFieldTitular.setText(c.getTitular());
+    }
+
+    public void comprobarBotones() {
+        if (posicion == 0)
+            jButtonAnterior.setEnabled(false);
+        else
+            jButtonAnterior.setEnabled(true);
+        
+        if (listaNodo.getArrayNodos()[posicion+1] == null)
+            jButtonSiguiente.setEnabled(false);
+        else
+            jButtonSiguiente.setEnabled(true);
     }
 }

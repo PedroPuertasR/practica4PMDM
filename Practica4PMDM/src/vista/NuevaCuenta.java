@@ -221,11 +221,16 @@ public class NuevaCuenta extends javax.swing.JPanel {
     private void crearCuenta() {
         
         Cuenta c = null;
+        String cadenaBloqueada = jTextFieldTipo2.getText(); // Cadena que se ha escrito en el text field
+        boolean bloqueada; // Variable que va a guardar si la cuenta esta bloqueada (true) o no (false)
+        if (cadenaBloqueada.equalsIgnoreCase("si") || cadenaBloqueada.equalsIgnoreCase("no"))
+            bloqueada = bloqueada(cadenaBloqueada);
+        
         if("Interes Mensual".equals(jLabelTipo1.getText())) {
             try {
                 c = new CuentaAhorro(
                         Double.parseDouble(jTextFieldTipo1.getText()),
-                        Boolean.parseBoolean(jTextFieldTipo2.getText()),
+                        bloqueada(jTextFieldTipo2.getText()),
                         jTextFieldTitular.getText(),
                         Double.parseDouble(jTextFieldSaldoActual.getText()),
                         Double.parseDouble(jTextFieldSaldoMinimo.getText()),
@@ -246,7 +251,10 @@ public class NuevaCuenta extends javax.swing.JPanel {
                 Logger.getLogger(NuevaCuenta.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
         listaNodo.insertar(c.getNumero(), c);
+    }
+
+    private boolean bloqueada(String text) {
+        return text.equalsIgnoreCase("si");
     }
 }

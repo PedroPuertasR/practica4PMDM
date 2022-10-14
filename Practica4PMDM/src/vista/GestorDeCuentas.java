@@ -54,6 +54,11 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu1.setText("Opciones Cuentas");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetPanel(evt);
+            }
+        });
 
         jMenuItemCarga.setText("Cargar");
         jMenuItemCarga.addActionListener(new java.awt.event.ActionListener() {
@@ -143,10 +148,17 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         if(panelVisualiza1a1 == null) {
             panelVisualiza1a1 = new Visualiza1a1(listaNodo);
             setContentPane(panelVisualiza1a1);
+            System.out.println("hola 1");
         } else {
             panelVisualiza1a1.setVisible(true);
+            System.out.println("hola 2");
         }
+        panelVisualiza1a1.comprobarBotones();
     }//GEN-LAST:event_jMenuItemUnoAUnoActionPerformed
+
+    private void resetPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetPanel
+        panelVisualiza1a1.setVisible(false);
+    }//GEN-LAST:event_resetPanel
 
     public void copiarLista(){
         listaCopia = new ArrayList <Nodo>();
