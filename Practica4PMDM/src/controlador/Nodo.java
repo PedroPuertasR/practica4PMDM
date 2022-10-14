@@ -5,11 +5,13 @@
  */
 package controlador;
 
+import java.io.Serializable;
+
 /**
  *
  * @author alumno
  */
-public class Nodo <T>{
+public class Nodo <T> implements Serializable{
     
     private int indice;
     private T typo;
