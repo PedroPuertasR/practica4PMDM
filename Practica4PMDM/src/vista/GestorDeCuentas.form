@@ -8,9 +8,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Opciones Cuentas"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetPanel"/>
-          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCarga">
               <Properties>
@@ -51,19 +48,26 @@
                 </MenuItem>
               </SubComponents>
             </Menu>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemJList">
+            <Menu class="javax.swing.JMenu" name="jMenuVisualizar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Visualiza JList"/>
+                <Property name="text" type="java.lang.String" value="Visualiza"/>
               </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemUnoAUno">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Visualiza 1 a 1"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemUnoAUnoActionPerformed"/>
-              </Events>
-            </MenuItem>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemUnoAUno">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Visualiza 1 a 1"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemUnoAUnoActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemJList">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Visualiza JList"/>
+                  </Properties>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
           </SubComponents>
         </Menu>
       </SubComponents>

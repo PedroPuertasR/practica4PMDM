@@ -48,17 +48,13 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         jMenuNuevaCuenta = new javax.swing.JMenu();
         jMenuItemAhorro = new javax.swing.JMenuItem();
         jMenuItemCorriente = new javax.swing.JMenuItem();
-        jMenuItemJList = new javax.swing.JMenuItem();
+        jMenuVisualizar = new javax.swing.JMenu();
         jMenuItemUnoAUno = new javax.swing.JMenuItem();
+        jMenuItemJList = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu1.setText("Opciones Cuentas");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetPanel(evt);
-            }
-        });
 
         jMenuItemCarga.setText("Cargar");
         jMenuItemCarga.addActionListener(new java.awt.event.ActionListener() {
@@ -96,8 +92,7 @@ public class GestorDeCuentas extends javax.swing.JFrame {
 
         jMenu1.add(jMenuNuevaCuenta);
 
-        jMenuItemJList.setText("Visualiza JList");
-        jMenu1.add(jMenuItemJList);
+        jMenuVisualizar.setText("Visualiza");
 
         jMenuItemUnoAUno.setText("Visualiza 1 a 1");
         jMenuItemUnoAUno.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +100,12 @@ public class GestorDeCuentas extends javax.swing.JFrame {
                 jMenuItemUnoAUnoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemUnoAUno);
+        jMenuVisualizar.add(jMenuItemUnoAUno);
+
+        jMenuItemJList.setText("Visualiza JList");
+        jMenuVisualizar.add(jMenuItemJList);
+
+        jMenu1.add(jMenuVisualizar);
 
         jMenuBar1.add(jMenu1);
 
@@ -134,37 +134,35 @@ public class GestorDeCuentas extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemGuardaActionPerformed
 
     private void nuevaCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaCuentaActionPerformed
+
         if(panelNuevaCuenta == null) {
             panelNuevaCuenta = new NuevaCuenta(listaNodo);
-            setContentPane(panelNuevaCuenta);
         } else {
             panelNuevaCuenta.setVisible(true);
         }
+        
+        setContentPane(panelNuevaCuenta);
         panelNuevaCuenta.vaciarTextFields();
         panelNuevaCuenta.modificaLabels(evt);
     }//GEN-LAST:event_nuevaCuentaActionPerformed
 
     private void jMenuItemUnoAUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUnoAUnoActionPerformed
+
         if(panelVisualiza1a1 == null) {
             panelVisualiza1a1 = new Visualiza1a1(listaNodo);
-            setContentPane(panelVisualiza1a1);
-            System.out.println("hola 1");
         } else {
             panelVisualiza1a1.setVisible(true);
-            System.out.println("hola 2");
         }
+        setContentPane(panelVisualiza1a1);
         panelVisualiza1a1.comprobarBotones();
+        panelVisualiza1a1.mostrarCuenta();
     }//GEN-LAST:event_jMenuItemUnoAUnoActionPerformed
-
-    private void resetPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetPanel
-        panelVisualiza1a1.setVisible(false);
-    }//GEN-LAST:event_resetPanel
 
     public void copiarLista(){
         listaCopia = new ArrayList <Nodo>();
         
-        for(int i = 0; i < listaNodo.getArrayNodos().length; i++){
-            listaCopia.add(listaNodo.getArrayNodos()[i]);
+        for (Nodo arrayNodo : listaNodo.getArrayNodos()) {
+            listaCopia.add(arrayNodo);
         }
     }
     
@@ -217,5 +215,6 @@ public class GestorDeCuentas extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemJList;
     private javax.swing.JMenuItem jMenuItemUnoAUno;
     private javax.swing.JMenu jMenuNuevaCuenta;
+    private javax.swing.JMenu jMenuVisualizar;
     // End of variables declaration//GEN-END:variables
 }

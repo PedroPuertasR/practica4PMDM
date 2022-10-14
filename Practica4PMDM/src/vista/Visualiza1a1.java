@@ -5,17 +5,12 @@
 
 package vista;
 
-import controlador.ESaldoNoValido;
 import controlador.Lista;
 import controlador.Nodo;
 import java.awt.event.ActionEvent;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import modelo.Cuenta;
-import modelo.CuentaAhorro;
-import modelo.CuentaCorriente;
+import modelo.*;
 
 /**
  *
@@ -200,13 +195,13 @@ public class Visualiza1a1 extends javax.swing.JPanel {
     private void jButtonAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnteriorActionPerformed
         posicion--;
         comprobarBotones();
-        mostrarCuenta(listaNodo.getArrayNodos()[posicion]);
+        mostrarCuenta();
     }//GEN-LAST:event_jButtonAnteriorActionPerformed
 
     private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteActionPerformed
         posicion++;
         comprobarBotones();
-        mostrarCuenta(listaNodo.getArrayNodos()[posicion]);
+        mostrarCuenta();
     }//GEN-LAST:event_jButtonSiguienteActionPerformed
 
 
@@ -254,17 +249,35 @@ public class Visualiza1a1 extends javax.swing.JPanel {
         }
     }
 
-    private void mostrarCuenta(Nodo nodo) {
+    public void mostrarCuenta() {
+        Nodo nodo = listaNodo.getArrayNodos()[posicion];
+        // Mensaje de control
         System.out.println(nodo.getTypo().toString());
-        
         Cuenta c = (Cuenta)nodo.getTypo();
+        
         jTextFieldFecha.setText(c.getFecha()+"");
         jTextFieldNumeroCuenta.setText(c.getNumero()+"");
         jTextFieldSaldoActual.setText(c.getSaldo()+"");
         jTextFieldSaldoMinimo.setText(c.getSaldoMinimo()+"");
-        jTextFieldTipo1.setText("");
-        jTextFieldTipo2.setText("");
         jTextFieldTitular.setText(c.getTitular());
+        
+        if (c instanceof CuentaAhorro) {
+            CuentaAhorro cuenta = (CuentaAhorro) c;
+            jTextFieldTipo1.setText(cuenta.getInteresMensual()+"");
+            jTextFieldTipo2.setText(cuenta.isBloqueada()+"");
+        } else {
+            if (c instanceof CuentaCorriente) {
+                CuentaCorriente cuenta = (CuentaCorriente) c;
+                jTextFieldTipo1.setText(cuenta.getComisionMantenimiento()+"");
+                jTextFieldTipo2.setText(cuenta.getTipoComision());
+            } else {
+                if(c instanceof CuentaInversion){
+                    CuentaInversion cuenta = (CuentaInversion) c;
+                    jTextFieldTipo1.setText(cuenta.getBeneficio()+"");
+                    jTextFieldTipo2.setText(cuenta.getTotalInvertido()+"");
+                }
+            }
+        }
     }
 
     public void comprobarBotones() {
