@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class GestionFicheros{
     
-    public static void leerFichero(Nodo [] arrayNodos) {
+    public static void leerFichero(Lista listaNodo) {
         FileInputStream archivoLectura;
         ObjectInputStream recupera_fichero;
         try {
@@ -29,12 +29,13 @@ public class GestionFicheros{
             archivoLectura = new FileInputStream(System.getProperty("user.dir")+ "\\cuentas.dat");
             recupera_fichero = new ObjectInputStream(archivoLectura);
             // Creamos un array auxiliar donde guardaremos el array leido del fichero
-            arrayNodos = (Nodo[])recupera_fichero.readObject();
+            listaNodo.setArrayNodos((Nodo[])recupera_fichero.readObject());
+            
             
             // cerramos el flujo ObjectInputStream
             recupera_fichero.close();
             // Ahora vamos a imprimir la información de dicho objeto. Lo hacemos mediante un "for-each" que recorra el array recuperado.
-            for(Nodo n: arrayNodos) {
+            for(Nodo n: listaNodo.getArrayNodos()) {
                 System.out.println(n);
             }
             
@@ -42,7 +43,7 @@ public class GestionFicheros{
         } catch (IOException ex) {
             System.out.println("Error al escribir los datos");
         } catch (ClassNotFoundException ex) {
-            System.out.println("Error: Clase no encontrada");
+            Logger.getLogger(GestionFicheros.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -54,18 +55,16 @@ public class GestionFicheros{
         
         try {
             // Instancio los flujos
-            System.out.println("hola1");
             flujoSalidaFichero = new FileOutputStream(System.getProperty("user.dir")+ "\\cuentas.dat");
-            System.out.println("hola2");
             flujoEscritura = new ObjectOutputStream(flujoSalidaFichero);
-            System.out.println("hola3");
+            
             flujoEscritura.writeObject(arrayNodos);
-            System.out.println("hola4");
             //Cerramos flujo
             flujoEscritura.close();
             flujoSalidaFichero.close();
-        } catch (IOException ex) {
-            Logger.getLogger(GestionFicheros.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            System.out.println(" Error cerrar flujo"+e.getMessage());
+        } finally {
         }
     }// Fin crear fichero
     

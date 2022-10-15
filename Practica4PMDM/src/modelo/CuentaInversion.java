@@ -18,7 +18,7 @@ public class CuentaInversion extends Cuenta{
     private double totalInvertido;
 
     public CuentaInversion(float beneficio, double totalInvertido, String titular, double saldo, double saldoMinimo, Calendar fecha) throws ESaldoNoValido {
-        super(titular, saldo, saldoMinimo, fecha);
+        //super(titular, saldo, saldoMinimo, fecha);
         this.beneficio = beneficio;
         this.totalInvertido = totalInvertido;
     }

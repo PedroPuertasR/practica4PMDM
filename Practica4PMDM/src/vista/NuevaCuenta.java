@@ -68,15 +68,11 @@ public class NuevaCuenta extends javax.swing.JPanel {
 
         jLabelTipo2.setText("Tipo 2");
 
-        jTextFieldTitular.setText("jTextField2");
-
-        jTextFieldSaldoActual.setText("jTextField3");
-
-        jTextFieldSaldoMinimo.setText("jTextField4");
-
-        jTextFieldFecha.setText("jTextField5");
-
-        jTextFieldTipo1.setText("jTextField6");
+        jTextFieldTitular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTitularActionPerformed(evt);
+            }
+        });
 
         jTextFieldTipo2.setText("jTextField7");
 
@@ -177,6 +173,10 @@ public class NuevaCuenta extends javax.swing.JPanel {
         this.setVisible(false);
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
+    private void jTextFieldTitularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTitularActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldTitularActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonGuardar;
@@ -227,6 +227,7 @@ public class NuevaCuenta extends javax.swing.JPanel {
             bloqueada = bloqueada(cadenaBloqueada);
         
         if("Interes Mensual".equals(jLabelTipo1.getText())) {
+            Calendar cal = Calendar.getInstance();
             try {
                 c = new CuentaAhorro(
                         Double.parseDouble(jTextFieldTipo1.getText()),
@@ -234,7 +235,7 @@ public class NuevaCuenta extends javax.swing.JPanel {
                         jTextFieldTitular.getText(),
                         Double.parseDouble(jTextFieldSaldoActual.getText()),
                         Double.parseDouble(jTextFieldSaldoMinimo.getText()),
-                        Calendar.getInstance());
+                        cal);
             } catch (ESaldoNoValido ex) {
                 Logger.getLogger(NuevaCuenta.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -257,4 +258,8 @@ public class NuevaCuenta extends javax.swing.JPanel {
     private boolean bloqueada(String text) {
         return text.equalsIgnoreCase("si");
     }
+    
+    public Lista getListaNodos (){
+        return this.listaNodo;
+    } 
 }

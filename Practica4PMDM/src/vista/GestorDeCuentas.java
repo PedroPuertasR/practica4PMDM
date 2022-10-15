@@ -20,6 +20,7 @@ public class GestorDeCuentas extends javax.swing.JFrame {
 
     private Lista listaNodo;
     private NuevaCuenta panelNuevaCuenta;
+    private VisualizaJList jList;
     private Visualiza1a1 panelVisualiza1a1;
     private List <Nodo> listaCopia;
     /**
@@ -103,6 +104,11 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         jMenuVisualizar.add(jMenuItemUnoAUno);
 
         jMenuItemJList.setText("Visualiza JList");
+        jMenuItemJList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemJListActionPerformed(evt);
+            }
+        });
         jMenuVisualizar.add(jMenuItemJList);
 
         jMenu1.add(jMenuVisualizar);
@@ -126,10 +132,12 @@ public class GestorDeCuentas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCargaActionPerformed
-        GestionFicheros.leerFichero(listaNodo.getArrayNodos());
+        GestionFicheros.leerFichero(listaNodo);
     }//GEN-LAST:event_jMenuItemCargaActionPerformed
 
     private void jMenuItemGuardaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGuardaActionPerformed
+        System.out.print("");
+        this.listaNodo=panelNuevaCuenta.getListaNodos();
         GestionFicheros.escribirFichero(listaNodo.getArrayNodos());
     }//GEN-LAST:event_jMenuItemGuardaActionPerformed
 
@@ -157,6 +165,16 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         panelVisualiza1a1.comprobarBotones();
         panelVisualiza1a1.mostrarCuenta();
     }//GEN-LAST:event_jMenuItemUnoAUnoActionPerformed
+
+    private void jMenuItemJListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemJListActionPerformed
+        // TODO add your handling code here:
+        if(jList==null){
+            jList=new VisualizaJList(listaNodo);
+        }else {
+            jList.setVisible(true);
+        }
+        setContentPane(jList);
+    }//GEN-LAST:event_jMenuItemJListActionPerformed
 
     public void copiarLista(){
         listaCopia = new ArrayList <Nodo>();

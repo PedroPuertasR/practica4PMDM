@@ -21,6 +21,10 @@ public class Cuenta implements Fecha, Serializable {
     private double saldo;
     private double saldoMinimo;
     private Calendar fecha;
+   public enum tipoCuenta {
+        AHORRO, CORRIENTE
+    }
+    private tipoCuenta tipoCuenta;
 
     public Cuenta() {
     }
@@ -31,6 +35,7 @@ public class Cuenta implements Fecha, Serializable {
         this.saldo = saldo;
         this.saldoMinimo = saldoMinimo;
         this.fecha = fecha;
+        //this.tipoCuenta=tipo;
         controlSaldo();
     }
 
@@ -77,6 +82,10 @@ public class Cuenta implements Fecha, Serializable {
     @Override
     public String toString() {
         return "Cuenta{" + "numero=" + numero + ", titular=" + titular + ", saldo=" + saldo + '}';
+    }
+    
+    public String toStringJlist(){
+        return numero+ " --- "+titular+ " --- "+saldo+ " --- "+tipoCuenta;
     }
 
     //Métodos

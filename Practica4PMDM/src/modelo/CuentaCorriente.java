@@ -21,6 +21,7 @@ public class CuentaCorriente extends Cuenta{
         super(titular, saldo, saldoMinimo, fecha);
         this.comisionMantenimiento = comisionMantenimiento;
         this.tipoComision = tipoComision;
+        
     }
 
     public double getComisionMantenimiento() {
