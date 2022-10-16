@@ -22,8 +22,8 @@ public class Lista <T>{
     public void insertar(int indice, T typo) {
         
         arrayNodos[contador] = new Nodo<T>(indice, typo);
-        // Pequeño mensaje de control
-        System.out.println(arrayNodos[contador].getTypo().toString());
+        // ********** MENSAJE DE CONTROL **********
+        // System.out.println(arrayNodos[contador].getTypo().toString());
         contador++;
         
     }

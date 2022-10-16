@@ -80,12 +80,6 @@ public class VisualizaJList extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jList1);
 
-        txtSaldoMinimo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSaldoMinimoActionPerformed(evt);
-            }
-        });
-
         lbSaldoMinimo.setText("Saldo mínimo:");
 
         lbFecha.setText("Fecha");
@@ -159,10 +153,6 @@ public class VisualizaJList extends javax.swing.JPanel {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtSaldoMinimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSaldoMinimoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSaldoMinimoActionPerformed
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         if (evt.getClickCount() == 1) {

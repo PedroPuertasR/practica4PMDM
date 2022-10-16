@@ -7,6 +7,7 @@ package vista;
 
 import controlador.ESaldoNoValido;
 import controlador.Lista;
+import controlador.Nodo;
 import java.awt.event.ActionEvent;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -67,12 +68,6 @@ public class NuevaCuenta extends javax.swing.JPanel {
         jLabelTipo1.setText("Tipo 1");
 
         jLabelTipo2.setText("Tipo 2");
-
-        jTextFieldTitular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldTitularActionPerformed(evt);
-            }
-        });
 
         jTextFieldTipo2.setText("jTextField7");
 
@@ -170,12 +165,12 @@ public class NuevaCuenta extends javax.swing.JPanel {
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         crearCuenta();
+        for(Nodo n: listaNodo.getArrayNodos()) {
+            System.out.println(n);
+        }
         this.setVisible(false);
+        
     }//GEN-LAST:event_jButtonGuardarActionPerformed
-
-    private void jTextFieldTitularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTitularActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldTitularActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

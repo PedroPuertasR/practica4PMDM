@@ -21,7 +21,7 @@ public class Cuenta implements Fecha, Serializable {
     private double saldo;
     private double saldoMinimo;
     private Calendar fecha;
-   public enum tipoCuenta {
+    public enum tipoCuenta {
         AHORRO, CORRIENTE
     }
     private tipoCuenta tipoCuenta;

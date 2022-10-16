@@ -70,18 +70,6 @@ public class Visualiza1a1 extends javax.swing.JPanel {
 
         jLabelTipo2.setText("Tipo 2");
 
-        jTextFieldTitular.setText("jTextField2");
-
-        jTextFieldSaldoActual.setText("jTextField3");
-
-        jTextFieldSaldoMinimo.setText("jTextField4");
-
-        jTextFieldFecha.setText("jTextField5");
-
-        jTextFieldTipo1.setText("jTextField6");
-
-        jTextFieldTipo2.setText("jTextField7");
-
         jButtonAnterior.setText("Anterior");
         jButtonAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,8 +87,6 @@ public class Visualiza1a1 extends javax.swing.JPanel {
         jButtonCalcular.setText("Calcular");
 
         jLabelNumeroCuenta.setText("Numero Cuenta");
-
-        jTextFieldNumeroCuenta.setText("jTextField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -251,7 +237,7 @@ public class Visualiza1a1 extends javax.swing.JPanel {
 
     public void mostrarCuenta() {
         Nodo nodo = listaNodo.getArrayNodos()[posicion];
-        // Mensaje de control
+        // Mensaje de control,
         System.out.println(nodo.getTypo().toString());
         Cuenta c = (Cuenta)nodo.getTypo();
         
