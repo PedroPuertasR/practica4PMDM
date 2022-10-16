@@ -141,7 +141,7 @@ public class VisualizaJList extends javax.swing.JPanel {
                     .addComponent(lbTipo2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonOrdenar)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -213,7 +213,7 @@ public class VisualizaJList extends javax.swing.JPanel {
             }
             if ((listaNodos.getArrayNodos()[i]).getIndice() == indiceCuentaActual) {
                 Cuenta cuenta = (Cuenta) listaNodos.getArrayNodos()[i].getTypo();
-                txtSaldoMinimo.setText(String.valueOf(cuenta.getSaldo()));
+                txtSaldoMinimo.setText(String.valueOf(cuenta.getSaldoMinimo()));
                 txtFecha.setText(GestionFicheros.formateaFecha(cuenta.getFecha()));
                 if (cuenta.getTipoCuenta().equals(Cuenta.tipoCuenta.AHORRO)) {
                     CuentaAhorro cuentaAhorro = (CuentaAhorro) listaNodos.getArrayNodos()[i].getTypo();
