@@ -36,8 +36,11 @@ public class GestionFicheros{
             recupera_fichero.close();
             // Ahora vamos a imprimir la información de dicho objeto. Lo hacemos mediante un "for-each" que recorra el array recuperado.
             for(Nodo n: listaNodo.getArrayNodos()) {
+                if (n != null)
+                    listaNodo.setContador(listaNodo.getContador()+1);
                 System.out.println(n);
             }
+            System.out.println(listaNodo.getContador()+ "*********");
             
             archivoLectura.close();
         } catch (IOException ex) {
@@ -55,7 +58,7 @@ public class GestionFicheros{
         
         try {
             // Instancio los flujos
-            flujoSalidaFichero = new FileOutputStream(System.getProperty("user.dir")+ "\\cuentas.dat");
+            flujoSalidaFichero = new FileOutputStream(System.getProperty("user.dir")+ "\\cuentas.dat", true);
             flujoEscritura = new ObjectOutputStream(flujoSalidaFichero);
             
             flujoEscritura.writeObject(arrayNodos);

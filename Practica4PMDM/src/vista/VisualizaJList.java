@@ -26,15 +26,8 @@ public class VisualizaJList extends javax.swing.JPanel {
     public VisualizaJList(Lista lista) {
         initComponents();
         this.listaNodos = lista;
-        cargarDatosJlist();
-    }
-
-    public void setListaNodos(Lista listaNodos) {
-        this.listaNodos = listaNodos;
     }
     
-    
-
     public void cargarDatosJlist() {
         DefaultListModel model = new DefaultListModel();
         for (int i = 0; i < listaNodos.getArrayNodos().length; i++) {

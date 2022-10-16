@@ -23,7 +23,7 @@ public class Lista <T>{
         
         arrayNodos[contador] = new Nodo<T>(indice, typo);
         // ********** MENSAJE DE CONTROL **********
-        // System.out.println(arrayNodos[contador].getTypo().toString());
+        System.out.println(arrayNodos[contador].getTypo().toString());
         contador++;
         
     }
@@ -34,6 +34,14 @@ public class Lista <T>{
 
     public void setArrayNodos(Nodo[] arrayNodos) {
         this.arrayNodos = arrayNodos;
+    }
+
+    public void setContador(int contador) {
+        this.contador = contador;
+    }
+    
+    public int getContador() {
+        return contador;
     }
     
 //    public void moveForward(){
