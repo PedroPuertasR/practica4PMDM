@@ -4,15 +4,19 @@
  */
 package vista;
 
+import controlador.ComparadorNumCuenta;
 import controlador.GestionFicheros;
 import controlador.Lista;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import controlador.Nodo;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import modelo.Cuenta;
 import modelo.CuentaAhorro;
 import modelo.CuentaCorriente;
+import modelo.CuentaInversion;
 
 /**
  *
@@ -21,6 +25,7 @@ import modelo.CuentaCorriente;
 public class VisualizaJList extends javax.swing.JPanel {
 
     private Lista listaNodos;
+    private List <Nodo> listaCopia;
     private int indiceCuentaActual;
 
     /**
@@ -63,6 +68,7 @@ public class VisualizaJList extends javax.swing.JPanel {
         lbFecha = new javax.swing.JLabel();
         lbTipo1 = new javax.swing.JLabel();
         lbTipo2 = new javax.swing.JLabel();
+        jButtonOrdenar = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -76,13 +82,20 @@ public class VisualizaJList extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jList1);
 
-        lbSaldoMinimo.setText("Saldo mínimo:");
+        lbSaldoMinimo.setText("Saldo");
 
         lbFecha.setText("Fecha");
 
         lbTipo1.setText("tipo1");
 
         lbTipo2.setText("tipo2");
+
+        jButtonOrdenar.setText("Ordenar");
+        jButtonOrdenar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOrdenarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -101,6 +114,10 @@ public class VisualizaJList extends javax.swing.JPanel {
                     .addComponent(txtSaldoMinimo)
                     .addComponent(txtTipo1)
                     .addComponent(txtTipo2, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addComponent(jButtonOrdenar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -122,7 +139,9 @@ public class VisualizaJList extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTipo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbTipo2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonOrdenar)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -144,9 +163,9 @@ public class VisualizaJList extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -164,6 +183,28 @@ public class VisualizaJList extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jList1MouseClicked
 
+    private void jButtonOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenarActionPerformed
+        
+        long total;
+        long inicio;
+        long fin;
+        
+        copiarLista();
+        
+        inicio = System.nanoTime();
+        //ordenarLista(listaCopia);
+        fin = System.nanoTime();
+        
+        total = (fin - inicio) / 1000000000;
+        
+        for(int i = 0; i < listaCopia.size(); i++){
+            System.out.println("Nº ");
+        }
+        
+        System.out.printf("Tiempo en ordenar la lista: %.2f segundos.", total);     
+        
+    }//GEN-LAST:event_jButtonOrdenarActionPerformed
+
     private void mostrarCuentaSeleccionada() {
         for (int i = 0; i < listaNodos.getArrayNodos().length; i++) {
 
@@ -172,7 +213,7 @@ public class VisualizaJList extends javax.swing.JPanel {
             }
             if ((listaNodos.getArrayNodos()[i]).getIndice() == indiceCuentaActual) {
                 Cuenta cuenta = (Cuenta) listaNodos.getArrayNodos()[i].getTypo();
-                txtSaldoMinimo.setText(String.valueOf(cuenta.getSaldoMinimo()));
+                txtSaldoMinimo.setText(String.valueOf(cuenta.getSaldo()));
                 txtFecha.setText(GestionFicheros.formateaFecha(cuenta.getFecha()));
                 if (cuenta.getTipoCuenta().equals(Cuenta.tipoCuenta.AHORRO)) {
                     CuentaAhorro cuentaAhorro = (CuentaAhorro) listaNodos.getArrayNodos()[i].getTypo();
@@ -181,7 +222,14 @@ public class VisualizaJList extends javax.swing.JPanel {
                     txtTipo1.setText(String.valueOf(cuentaAhorro.getInteresMensual()));
                     txtTipo2.setText(String.valueOf(cuentaAhorro.isBloqueada()));
 
-                } else {
+                }else if(cuenta.getTipoCuenta().equals(Cuenta.tipoCuenta.INVERSION)) {
+                    CuentaInversion cuentaInversion = (CuentaInversion) listaNodos.getArrayNodos()[i].getTypo();
+                    lbTipo1.setText("Beneficio");
+                    lbTipo2.setText("Total invertido");
+                    txtTipo1.setText(String.valueOf(cuentaInversion.getBeneficio()));
+                    txtTipo2.setText(String.valueOf(cuentaInversion.getTotalInvertido()));
+                    
+                }else {
 
                     CuentaCorriente cuentaCorriente = (CuentaCorriente) listaNodos.getArrayNodos()[i].getTypo();
                     lbTipo1.setText("Comsión de Mantenimiento");
@@ -194,8 +242,20 @@ public class VisualizaJList extends javax.swing.JPanel {
         }
     }
 
+    public void copiarLista(){
+        listaCopia = new ArrayList <Nodo>();
+        
+        for(Nodo n : listaNodos.getArrayNodos()){
+            listaCopia.add(n);
+        }
+    }
+    
+    public void ordenarLista(List <Nodo> lista){
+        Collections.sort(lista, new ComparadorNumCuenta());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonOrdenar;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

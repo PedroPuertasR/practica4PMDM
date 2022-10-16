@@ -10,7 +10,6 @@ import static controlador.GestionFicheros.formateaFecha;
 import controlador.Lista;
 import controlador.Nodo;
 import java.awt.event.ActionEvent;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -36,9 +36,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="104" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel1" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -94,6 +94,11 @@
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                  <Component id="jButtonOrdenar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -119,7 +124,9 @@
                       <Component id="txtTipo2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbTipo2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButtonOrdenar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="11" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -135,7 +142,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lbSaldoMinimo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Saldo m&#xed;nimo:"/>
+            <Property name="text" type="java.lang.String" value="Saldo"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbFecha">
@@ -152,6 +159,14 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="tipo2"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonOrdenar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ordenar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonOrdenarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

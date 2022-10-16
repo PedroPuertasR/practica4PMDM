@@ -22,15 +22,32 @@ public class GestorDeCuentas extends javax.swing.JFrame {
     private NuevaCuenta panelNuevaCuenta;
     private VisualizaJList jList;
     private Visualiza1a1 panelVisualiza1a1;
-    private List <Nodo> listaCopia;
     /**
      * Creates new form GestorDeCuentas
      */
     public GestorDeCuentas() {
         listaNodo = new Lista(100);
-        copiarLista();
         //ordenarLista(listaCopia);
         initComponents();
+        
+        //        Calendar fecha;
+        //        Cuenta c;
+        //
+        //        fecha = seteaCuenta(18,10,2020);
+        //        c = new CuentaCorriente((float) 0.05, "semestral", "Pepito", 5634, 175, fecha);
+        //        listaNodo.insertar(c.getNumero(),c);
+        //
+        //        fecha = seteaCuenta(18,7,2021);
+        //        c = new CuentaInversion(0, 200, "Manu", 34523, 34, fecha);
+        //        listaNodo.insertar(c.getNumero(),c);
+        //
+        //        fecha = seteaCuenta(18,10,2021);
+        //        c = new CuentaAhorro(0.1, false, "Ana", 6457, 745, fecha);
+        //        listaNodo.insertar(c.getNumero(),c);
+        //
+        //        fecha = seteaCuenta(18,4,2020);
+        //        c = new CuentaCorriente((float) 0.2, "anual", "Juan", 1865, 475, fecha);
+        //        listaNodo.insertar(c.getNumero(),c);
     }
 
     /**
@@ -136,8 +153,6 @@ public class GestorDeCuentas extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemCargaActionPerformed
 
     private void jMenuItemGuardaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGuardaActionPerformed
-        System.out.print("");
-        this.listaNodo=panelNuevaCuenta.getListaNodos();
         GestionFicheros.escribirFichero(listaNodo.getArrayNodos());
     }//GEN-LAST:event_jMenuItemGuardaActionPerformed
 
@@ -177,18 +192,6 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         setContentPane(jList);
     }//GEN-LAST:event_jMenuItemJListActionPerformed
 
-    public void copiarLista(){
-        listaCopia = new ArrayList <Nodo>();
-        
-        for (Nodo arrayNodo : listaNodo.getArrayNodos()) {
-            listaCopia.add(arrayNodo);
-        }
-    }
-    
-    public void ordenarLista(List <Nodo> lista){
-        Collections.sort(lista, new ComparadorNumCuenta());
-    }
-    
     /**
      * @param args the command line arguments
      */
@@ -223,6 +226,15 @@ public class GestorDeCuentas extends javax.swing.JFrame {
             }
         });
     }
+    
+    //    private Calendar seteaCuenta(int d, int m, int y){
+    //        Calendar date = Calendar.getInstance();
+    //        date.set(Calendar.YEAR, y);
+    //        date.set(Calendar.MONTH, m+1);
+    //        date.set(Calendar.DAY_OF_MONTH, d);
+    //
+    //        return date;
+    //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
