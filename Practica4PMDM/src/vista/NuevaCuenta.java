@@ -6,6 +6,7 @@
 package vista;
 
 import controlador.ESaldoNoValido;
+import static controlador.GestionFicheros.formateaFecha;
 import controlador.Lista;
 import controlador.Nodo;
 import java.awt.event.ActionEvent;
@@ -23,8 +24,6 @@ import modelo.CuentaCorriente;
  */
 public class NuevaCuenta extends javax.swing.JPanel {
 
-    private Calendar fecha;
-    private SimpleDateFormat sdf;
     private Lista listaNodo;
     
     /** Creates new form NuevaCuenta */
@@ -202,9 +201,8 @@ public class NuevaCuenta extends javax.swing.JPanel {
     }
 
     public void vaciarTextFields() {
-        fecha = Calendar.getInstance();
-        sdf = new SimpleDateFormat("dd-MM-yyyy");
-        jTextFieldFecha.setText("" + sdf.format(fecha.getTime()));
+        
+        jTextFieldFecha.setText(formateaFecha(Calendar.getInstance()));
         jTextFieldSaldoActual.setText("");
         jTextFieldSaldoMinimo.setText("");
         jTextFieldTipo1.setText("");
@@ -247,6 +245,7 @@ public class NuevaCuenta extends javax.swing.JPanel {
                 Logger.getLogger(NuevaCuenta.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
         listaNodo.insertar(c.getNumero(), c);
     }
 

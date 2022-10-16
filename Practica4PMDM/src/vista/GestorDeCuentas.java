@@ -170,7 +170,7 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(jList==null){
             jList=new VisualizaJList(listaNodo);
-        }else {
+        } else {
             jList.setVisible(true);
         }
         jList.cargarDatosJlist();

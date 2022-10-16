@@ -10,6 +10,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,7 +42,7 @@ public class GestionFicheros{
                     listaNodo.setContador(listaNodo.getContador()+1);
                 System.out.println(n);
             }
-            System.out.println(listaNodo.getContador()+ "*********");
+            System.out.println(listaNodo.getContador()+ " *********");
             
             archivoLectura.close();
         } catch (IOException ex) {
@@ -71,5 +73,8 @@ public class GestionFicheros{
         }
     }// Fin crear fichero
     
-    
+    public static String formateaFecha(Calendar fecha){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return sdf.format(fecha.getTime());
+    }
 }

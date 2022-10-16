@@ -5,6 +5,7 @@
 
 package vista;
 
+import controlador.GestionFicheros;
 import controlador.Lista;
 import controlador.Nodo;
 import java.awt.event.ActionEvent;
@@ -18,8 +19,6 @@ import modelo.*;
  */
 public class Visualiza1a1 extends javax.swing.JPanel {
 
-    private Calendar fecha;
-    private SimpleDateFormat sdf;
     private Lista listaNodo;
     private int posicion;
     
@@ -241,7 +240,7 @@ public class Visualiza1a1 extends javax.swing.JPanel {
         System.out.println(nodo.getTypo().toString());
         Cuenta c = (Cuenta)nodo.getTypo();
         
-        jTextFieldFecha.setText(c.getFecha()+"");
+        jTextFieldFecha.setText(GestionFicheros.formateaFecha(c.getFecha()));
         jTextFieldNumeroCuenta.setText(c.getNumero()+"");
         jTextFieldSaldoActual.setText(c.getSaldo()+"");
         jTextFieldSaldoMinimo.setText(c.getSaldoMinimo()+"");

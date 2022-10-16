@@ -4,7 +4,10 @@
  */
 package vista;
 
+import controlador.GestionFicheros;
 import controlador.Lista;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import modelo.Cuenta;
@@ -170,7 +173,7 @@ public class VisualizaJList extends javax.swing.JPanel {
             if ((listaNodos.getArrayNodos()[i]).getIndice() == indiceCuentaActual) {
                 Cuenta cuenta = (Cuenta) listaNodos.getArrayNodos()[i].getTypo();
                 txtSaldoMinimo.setText(String.valueOf(cuenta.getSaldoMinimo()));
-                txtFecha.setText(String.valueOf(cuenta.getFecha()));
+                txtFecha.setText(GestionFicheros.formateaFecha(cuenta.getFecha()));
                 if (cuenta.getTipoCuenta().equals(Cuenta.tipoCuenta.AHORRO)) {
                     CuentaAhorro cuentaAhorro = (CuentaAhorro) listaNodos.getArrayNodos()[i].getTypo();
                     lbTipo1.setText("Interés Mensual");
@@ -181,7 +184,7 @@ public class VisualizaJList extends javax.swing.JPanel {
                 } else {
 
                     CuentaCorriente cuentaCorriente = (CuentaCorriente) listaNodos.getArrayNodos()[i].getTypo();
-                    lbTipo1.setText("Comsiión de Mantenimiento");
+                    lbTipo1.setText("Comsión de Mantenimiento");
                     lbTipo2.setText("Tipo de Comisión");
                     txtTipo1.setText(String.valueOf(cuentaCorriente.getComisionMantenimiento()));
                     txtTipo2.setText(String.valueOf(cuentaCorriente.getTipoComision()));
