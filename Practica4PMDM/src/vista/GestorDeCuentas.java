@@ -171,6 +171,7 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         if(jList==null){
             jList=new VisualizaJList(listaNodo);
         }else {
+            jList.setListaNodos(listaNodo);
             jList.setVisible(true);
         }
         setContentPane(jList);

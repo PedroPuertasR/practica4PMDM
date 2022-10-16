@@ -29,13 +29,13 @@ public class Cuenta implements Fecha, Serializable {
     public Cuenta() {
     }
 
-    public Cuenta(String titular, double saldo, double saldoMinimo, Calendar fecha) throws ESaldoNoValido {
+    public Cuenta(String titular, double saldo, double saldoMinimo, Calendar fecha, tipoCuenta tipo) throws ESaldoNoValido {
         this.numero = generarAleatorio(1000, 1);
         this.titular = titular; // Debe ser alfanumerico y trascient o no serializable
         this.saldo = saldo;
         this.saldoMinimo = saldoMinimo;
         this.fecha = fecha;
-        //this.tipoCuenta=tipo;
+        this.tipoCuenta=tipo;
         controlSaldo();
     }
 
@@ -78,6 +78,16 @@ public class Cuenta implements Fecha, Serializable {
     public void setFecha(Calendar fecha) {
         this.fecha = fecha;
     }
+
+    public tipoCuenta getTipoCuenta() {
+        return tipoCuenta;
+    }
+
+    public void setTipoCuenta(tipoCuenta tipoCuenta) {
+        this.tipoCuenta = tipoCuenta;
+    }
+    
+    
 
     @Override
     public String toString() {
@@ -146,5 +156,6 @@ public class Cuenta implements Fecha, Serializable {
 
         }
     }
+    
 
 }

@@ -63,6 +63,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jList1MouseClicked"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -77,12 +80,12 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="lbTipo2" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="lbTipo1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lbTipo2" min="-2" pref="116" max="-2" attributes="0"/>
+                      <Component id="lbTipo1" max="32767" attributes="0"/>
                       <Component id="lbFecha" alignment="0" max="32767" attributes="0"/>
-                      <Component id="lbSaldoMinimo" alignment="0" pref="75" max="32767" attributes="0"/>
+                      <Component id="lbSaldoMinimo" alignment="0" pref="126" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="105" max="32767" attributes="0"/>
+                  <EmptySpace pref="54" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="txtFecha" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtSaldoMinimo" alignment="0" max="32767" attributes="0"/>

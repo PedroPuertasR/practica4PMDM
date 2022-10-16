@@ -6,7 +6,10 @@ package vista;
 
 import controlador.Lista;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import modelo.Cuenta;
+import modelo.CuentaAhorro;
+import modelo.CuentaCorriente;
 
 /**
  *
@@ -15,6 +18,8 @@ import modelo.Cuenta;
 public class VisualizaJList extends javax.swing.JPanel {
 
     private Lista listaNodos;
+    private int indiceCuentaActual;
+
     /**
      * Creates new form VisualizaJList1
      */
@@ -24,11 +29,16 @@ public class VisualizaJList extends javax.swing.JPanel {
         cargarDatosJlist();
     }
 
+    public void setListaNodos(Lista listaNodos) {
+        this.listaNodos = listaNodos;
+    }
     
-    public void cargarDatosJlist(){
+    
+
+    public void cargarDatosJlist() {
         DefaultListModel model = new DefaultListModel();
-        for(int i=0; i<listaNodos.getArrayNodos().length; i++){
-            if(listaNodos.getArrayNodos()[i] == null) {
+        for (int i = 0; i < listaNodos.getArrayNodos().length; i++) {
+            if (listaNodos.getArrayNodos()[i] == null) {
                 break;
             }
             Cuenta cuenta = (Cuenta) listaNodos.getArrayNodos()[i].getTypo();
@@ -63,6 +73,11 @@ public class VisualizaJList extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         txtSaldoMinimo.addActionListener(new java.awt.event.ActionListener() {
@@ -86,11 +101,11 @@ public class VisualizaJList extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbTipo2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbTipo2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbTipo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbSaldoMinimo, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                    .addComponent(lbSaldoMinimo, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtFecha)
                     .addComponent(txtSaldoMinimo)
@@ -148,6 +163,50 @@ public class VisualizaJList extends javax.swing.JPanel {
     private void txtSaldoMinimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSaldoMinimoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSaldoMinimoActionPerformed
+
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        if (evt.getClickCount() == 1) {
+            JList target = (JList) evt.getSource();
+            int index = target.locationToIndex(evt.getPoint());
+            if (index >= 0) {
+                Object item = target.getModel().getElementAt(index);
+                String[] valores = item.toString().replace(" ", "").split("---");
+                this.indiceCuentaActual = Integer.valueOf(valores[0]);
+                mostrarCuentaSeleccionada();
+
+            }
+        }
+    }//GEN-LAST:event_jList1MouseClicked
+
+    private void mostrarCuentaSeleccionada() {
+        for (int i = 0; i < listaNodos.getArrayNodos().length; i++) {
+
+            if (listaNodos.getArrayNodos()[i] == null) {
+                break;
+            }
+            if ((listaNodos.getArrayNodos()[i]).getIndice() == indiceCuentaActual) {
+                Cuenta cuenta = (Cuenta) listaNodos.getArrayNodos()[i].getTypo();
+                txtSaldoMinimo.setText(String.valueOf(cuenta.getSaldoMinimo()));
+                txtFecha.setText(String.valueOf(cuenta.getFecha()));
+                if (cuenta.getTipoCuenta().equals(Cuenta.tipoCuenta.AHORRO)) {
+                    CuentaAhorro cuentaAhorro = (CuentaAhorro) listaNodos.getArrayNodos()[i].getTypo();
+                    lbTipo1.setText("Interés Mensual");
+                    lbTipo2.setText("¿Bloqueada?");
+                    txtTipo1.setText(String.valueOf(cuentaAhorro.getInteresMensual()));
+                    txtTipo2.setText(String.valueOf(cuentaAhorro.isBloqueada()));
+
+                } else {
+
+                    CuentaCorriente cuentaCorriente = (CuentaCorriente) listaNodos.getArrayNodos()[i].getTypo();
+                    lbTipo1.setText("Comsiión de Mantenimiento");
+                    lbTipo2.setText("Tipo de Comisión");
+                    txtTipo1.setText(String.valueOf(cuentaCorriente.getComisionMantenimiento()));
+                    txtTipo2.setText(String.valueOf(cuentaCorriente.getTipoComision()));
+
+                }
+            }
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

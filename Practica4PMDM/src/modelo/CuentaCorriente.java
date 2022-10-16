@@ -18,7 +18,7 @@ public class CuentaCorriente extends Cuenta{
     private String tipoComision; // Se calcula semetral o anual
 
     public CuentaCorriente(float comisionMantenimiento, String tipoComision, String titular, double saldo, double saldoMinimo, Calendar fecha) throws ESaldoNoValido {
-        super(titular, saldo, saldoMinimo, fecha);
+        super(titular, saldo, saldoMinimo, fecha, tipoCuenta.CORRIENTE);
         this.comisionMantenimiento = comisionMantenimiento;
         this.tipoComision = tipoComision;
         

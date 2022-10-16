@@ -18,7 +18,7 @@ public class CuentaAhorro extends Cuenta{
     private boolean bloqueada;
 
     public CuentaAhorro(double interesMensual, boolean bloqueada, String titular, double saldo, double saldoMinimo, Calendar fecha) throws ESaldoNoValido {
-        super(titular, saldo, saldoMinimo, fecha);
+        super(titular, saldo, saldoMinimo, fecha, tipoCuenta.AHORRO);
         this.interesMensual = interesMensual;
         this.bloqueada = bloqueada;
     }
