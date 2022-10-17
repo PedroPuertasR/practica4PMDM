@@ -8,9 +8,9 @@ package vista;
 import controlador.GestionFicheros;
 import controlador.Lista;
 import controlador.Nodo;
-import java.awt.event.ActionEvent;
-import java.text.SimpleDateFormat;
+import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 import modelo.*;
 
 /**
@@ -21,6 +21,7 @@ public class Visualiza1a1 extends javax.swing.JPanel {
 
     private Lista listaNodo;
     private int posicion;
+    DecimalFormat dc = new DecimalFormat("0.00");
     
     /** Creates new form NuevaCuenta */
     public Visualiza1a1(Lista listanodo) {
@@ -84,6 +85,11 @@ public class Visualiza1a1 extends javax.swing.JPanel {
         });
 
         jButtonCalcular.setText("Calcular");
+        jButtonCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCalcularActionPerformed(evt);
+            }
+        });
 
         jLabelNumeroCuenta.setText("Numero Cuenta");
 
@@ -181,13 +187,49 @@ public class Visualiza1a1 extends javax.swing.JPanel {
         posicion--;
         comprobarBotones();
         mostrarCuenta();
+        modificaLabels();
     }//GEN-LAST:event_jButtonAnteriorActionPerformed
 
     private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteActionPerformed
         posicion++;
         comprobarBotones();
         mostrarCuenta();
+        modificaLabels();
     }//GEN-LAST:event_jButtonSiguienteActionPerformed
+
+    private void jButtonCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularActionPerformed
+                                         
+        Nodo nodo = listaNodo.getArrayNodos()[posicion];
+        long meses;
+        
+        if (nodo.getTypo() instanceof CuentaAhorro) {
+            CuentaAhorro ahorro = (CuentaAhorro) nodo.getTypo();
+            meses = diasTranscurridos(ahorro.getFecha()) / 30;
+            ahorro.setSaldo(((ahorro.getSaldo() * ahorro.getInteresMensual()) * meses) + ahorro.getSaldo());
+            jTextFieldSaldoActual.setText(String.valueOf(dc.format(ahorro.getSaldo())));
+            listaNodo.getArrayNodos()[posicion].setTypo(ahorro);
+            
+        } else if (nodo.getTypo() instanceof CuentaCorriente) {
+            CuentaCorriente corriente = (CuentaCorriente) nodo.getTypo();
+            meses = diasTranscurridos(corriente.getFecha()) / 30;
+            if(corriente.getTipoComision().equalsIgnoreCase("semestral")){
+                corriente.setSaldo(corriente.getSaldo() - ((corriente.getSaldo() * corriente.getComisionMantenimiento()) * meses / 6));
+            }else{
+                corriente.setSaldo(corriente.getSaldo() - ((corriente.getSaldo() * corriente.getComisionMantenimiento()) * meses / 12));
+            }
+            
+            jTextFieldSaldoActual.setText(String.valueOf(dc.format(corriente.getSaldo())));
+            listaNodo.getArrayNodos()[posicion].setTypo(corriente);
+        } else {
+            CuentaInversion inversion = (CuentaInversion) nodo.getTypo();
+            meses = diasTranscurridos(inversion.getFecha()) / 30;
+            inversion.setSaldo(((inversion.getSaldo() * inversion.getBeneficio()) * meses / 3) + inversion.getSaldo());
+            jTextFieldSaldoActual.setText(String.valueOf(dc.format(inversion.getSaldo())));
+
+            listaNodo.getArrayNodos()[posicion].setTypo(inversion);
+        }
+        
+    }//GEN-LAST:event_jButtonCalcularActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -223,14 +265,17 @@ public class Visualiza1a1 extends javax.swing.JPanel {
         jTextFieldTitular.setEditable(false);
     }
 
-    public void modificaLabels(ActionEvent evt) {
-        // System.out.println(evt.getSource().toString());
-        if(evt.getSource().toString().contains("text=Ahorro")) {
+    public void modificaLabels() {
+        
+        if(listaNodo.getArrayNodos()[posicion].getTypo() instanceof CuentaAhorro) {
             jLabelTipo1.setText("Interes Mensual");
             jLabelTipo2.setText("Bloqueada");
-        } else {
+        } else if(listaNodo.getArrayNodos()[posicion].getTypo() instanceof CuentaCorriente) {
             jLabelTipo1.setText("Comision mantenimiento");
             jLabelTipo2.setText("Tipo comision");
+        }else{
+            jLabelTipo1.setText("Beneficio/Pérdida");
+            jLabelTipo2.setText("Total invertido");
         }
     }
 
@@ -242,24 +287,29 @@ public class Visualiza1a1 extends javax.swing.JPanel {
         
         jTextFieldFecha.setText(GestionFicheros.formateaFecha(c.getFecha()));
         jTextFieldNumeroCuenta.setText(c.getNumero()+"");
-        jTextFieldSaldoActual.setText(c.getSaldo()+"");
+        jTextFieldSaldoActual.setText(dc.format(c.getSaldo())+"");
         jTextFieldSaldoMinimo.setText(c.getSaldoMinimo()+"");
         jTextFieldTitular.setText(c.getTitular());
         
         if (c instanceof CuentaAhorro) {
             CuentaAhorro cuenta = (CuentaAhorro) c;
-            jTextFieldTipo1.setText(cuenta.getInteresMensual()+"");
+            jTextFieldTipo1.setText(dc.format(cuenta.getInteresMensual())+"");
             jTextFieldTipo2.setText(cuenta.isBloqueada()+"");
+            
+            jButtonCalcular.setEnabled(diasTranscurridos(c.getFecha()) > 30);
         } else {
             if (c instanceof CuentaCorriente) {
                 CuentaCorriente cuenta = (CuentaCorriente) c;
-                jTextFieldTipo1.setText(cuenta.getComisionMantenimiento()+"");
+                jTextFieldTipo1.setText(dc.format(cuenta.getComisionMantenimiento())+"");
                 jTextFieldTipo2.setText(cuenta.getTipoComision());
+                jButtonCalcular.setEnabled(diasTranscurridos(c.getFecha()) > 180);
+
             } else {
                 if(c instanceof CuentaInversion){
                     CuentaInversion cuenta = (CuentaInversion) c;
-                    jTextFieldTipo1.setText(cuenta.getBeneficio()+"");
+                    jTextFieldTipo1.setText(dc.format(cuenta.getBeneficio())+"");
                     jTextFieldTipo2.setText(cuenta.getTotalInvertido()+"");
+                    jButtonCalcular.setEnabled(diasTranscurridos(c.getFecha()) > 90);
                 }
             }
         }
@@ -276,4 +326,11 @@ public class Visualiza1a1 extends javax.swing.JPanel {
         else
             jButtonSiguiente.setEnabled(true);
     }
+    
+    public static long diasTranscurridos(Calendar fechaCuenta) {
+        long end = fechaCuenta.getTimeInMillis();
+        long start = Calendar.getInstance().getTimeInMillis();
+        return TimeUnit.MILLISECONDS.toDays(Math.abs(end - start));
+    }
+    
 }

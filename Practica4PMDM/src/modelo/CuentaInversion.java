@@ -17,11 +17,11 @@ public class CuentaInversion extends Cuenta{
     private float beneficio; // 10% positivo o negativo del saldo y se calcula trimestral
     private double totalInvertido;
 
-    public CuentaInversion(float beneficio, double totalInvertido, String titular, double saldo, double saldoMinimo, Calendar fecha) throws ESaldoNoValido {
+    public CuentaInversion(double totalInvertido, String titular, double saldo, double saldoMinimo, Calendar fecha) throws ESaldoNoValido {
         super(titular, saldo, saldoMinimo, fecha, tipoCuenta.INVERSION);
         
-        this.beneficio = beneficio;
-        this.totalInvertido = totalInvertido;
+        this.beneficio = (float) generarAleatorio(10, -10) / 100;
+        this.totalInvertido = totalInvertido; 
     }
 
     public float getBeneficio() {

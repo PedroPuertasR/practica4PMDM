@@ -4,13 +4,13 @@
  */
 package vista;
 
-import controlador.ComparadorNumCuenta;
+import controlador.ESaldoNoValido;
 import controlador.GestionFicheros;
 import controlador.Lista;
-import controlador.Nodo;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modelo.*;
 
 /**
  *
@@ -29,25 +29,35 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         listaNodo = new Lista(100);
         //ordenarLista(listaCopia);
         initComponents();
-        
-        //        Calendar fecha;
-        //        Cuenta c;
-        //
-        //        fecha = seteaCuenta(18,10,2020);
-        //        c = new CuentaCorriente((float) 0.05, "semestral", "Pepito", 5634, 175, fecha);
-        //        listaNodo.insertar(c.getNumero(),c);
-        //
-        //        fecha = seteaCuenta(18,7,2021);
-        //        c = new CuentaInversion(0, 200, "Manu", 34523, 34, fecha);
-        //        listaNodo.insertar(c.getNumero(),c);
-        //
-        //        fecha = seteaCuenta(18,10,2021);
-        //        c = new CuentaAhorro(0.1, false, "Ana", 6457, 745, fecha);
-        //        listaNodo.insertar(c.getNumero(),c);
-        //
-        //        fecha = seteaCuenta(18,4,2020);
-        //        c = new CuentaCorriente((float) 0.2, "anual", "Juan", 1865, 475, fecha);
-        //        listaNodo.insertar(c.getNumero(),c);
+
+//        Calendar fecha;
+//        Cuenta c;
+//        
+//        try {
+//            
+//            fecha = seteaCuenta(18,10,2020);
+//            c = new CuentaCorriente((float) 0.05, "semestral", "Pepito", 5634, 175, fecha);
+//            listaNodo.insertar(c.getNumero(),c);
+//            
+//            fecha = seteaCuenta(18,7,2021);
+//            c = new CuentaInversion(200, "Manu", 34523, 34, fecha);
+//            listaNodo.insertar(c.getNumero(),c);
+//            
+//            fecha = seteaCuenta(18,10,2021);
+//            c = new CuentaAhorro(0.1, false, "Ana", 6457, 745, fecha);
+//            listaNodo.insertar(c.getNumero(),c);
+//            
+//            fecha = seteaCuenta(18,4,2020);
+//            c = new CuentaCorriente((float) 0.2, "anual", "Juan", 1865, 475, fecha);
+//            listaNodo.insertar(c.getNumero(),c);
+//            
+//            fecha = seteaCuenta(25, 9, 2022);   
+//            c = new CuentaInversion(2000, "Alma", 3000, 100, fecha);
+//            listaNodo.insertar(c.getNumero(), c);
+//            
+//        } catch (ESaldoNoValido ex) {
+//            Logger.getLogger(GestorDeCuentas.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     /**
@@ -179,6 +189,7 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         setContentPane(panelVisualiza1a1);
         panelVisualiza1a1.comprobarBotones();
         panelVisualiza1a1.mostrarCuenta();
+        panelVisualiza1a1.modificaLabels();
     }//GEN-LAST:event_jMenuItemUnoAUnoActionPerformed
 
     private void jMenuItemJListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemJListActionPerformed
@@ -227,14 +238,14 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         });
     }
     
-    //    private Calendar seteaCuenta(int d, int m, int y){
-    //        Calendar date = Calendar.getInstance();
-    //        date.set(Calendar.YEAR, y);
-    //        date.set(Calendar.MONTH, m+1);
-    //        date.set(Calendar.DAY_OF_MONTH, d);
-    //
-    //        return date;
-    //    }
+//    private Calendar seteaCuenta(int d, int m, int y){
+//        Calendar date = Calendar.getInstance();
+//        date.set(Calendar.YEAR, y);
+//        date.set(Calendar.MONTH, m+1);
+//        date.set(Calendar.DAY_OF_MONTH, d);
+//
+//        return date;
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;

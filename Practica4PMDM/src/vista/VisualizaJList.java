@@ -192,7 +192,7 @@ public class VisualizaJList extends javax.swing.JPanel {
         copiarLista();
         
         inicio = System.nanoTime();
-        //ordenarLista(listaCopia);
+        ordenarLista(listaCopia);
         fin = System.nanoTime();
         
         total = (fin - inicio) / 1000000000;
