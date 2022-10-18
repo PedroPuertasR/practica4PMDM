@@ -264,11 +264,15 @@ public class VisualizaJList extends javax.swing.JPanel {
         
         long inicio, inicio2, fin, fin2, total, total2;
 
+        System.out.println("Inicio Lista.");
+        
         inicio = System.nanoTime();
-        listaCopia.setArrayNodos(Arrays.sort(listaCopia.getArrayNodos(), Collections.reverseOrder()));
+        Arrays.sort(listaCopia.getArrayNodos());
         fin = System.nanoTime();
         
         total = fin - inicio / 1000000000;
+        
+        System.out.println("Inicio ArrayList.");
         
         inicio2 = System.nanoTime();
         Collections.sort(listaArrayList, new ComparadorNumCuenta());

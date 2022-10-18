@@ -23,7 +23,7 @@ public class ComparadorNumCuenta implements Comparator <Nodo>{
 	if(n1.getIndice() < n2.getIndice()) {
             return -1;
 	}else if(n1.getIndice() == n2.getIndice()) {
-            return comp1.getTitular().toLowerCase().compareTo(comp2.getTitular().toLowerCase());
+            return 1;
 	}else {
             return 1;
 	}
