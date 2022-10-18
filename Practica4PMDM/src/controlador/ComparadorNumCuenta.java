@@ -6,7 +6,6 @@
 package controlador;
 
 import java.util.Comparator;
-import modelo.Cuenta;
 
 /**
  *
@@ -16,9 +15,6 @@ public class ComparadorNumCuenta implements Comparator <Nodo>{
     
     @Override
     public int compare(Nodo n1, Nodo n2) {
-        
-        Cuenta comp1 = (Cuenta) n1.getTypo();
-        Cuenta comp2 = (Cuenta) n2.getTypo();
 
 	if(n1.getIndice() < n2.getIndice()) {
             return -1;

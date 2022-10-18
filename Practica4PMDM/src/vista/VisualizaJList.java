@@ -239,22 +239,22 @@ public class VisualizaJList extends javax.swing.JPanel {
     }
 
     public void copiarLista(){
-        listaCopia = new Lista(100000);
+        listaCopia = new Lista(1000);
         listaArrayList = new ArrayList <Nodo>();
         Calendar fecha;
         fecha = seteaCuenta(18,4,2020);
         Cuenta c;
         
         try {
-            c = new CuentaCorriente(0.2f, "anual", "Juan", 1865, 475, fecha);
+            for (int i = 0; i < 1000; i++){
+                c = new CuentaCorriente(0.2f, "anual", "Juan", 1865, 475, fecha);
+                listaCopia.insertar(c.getNumero(), c);
+            }
+            
         } catch (ESaldoNoValido e) {
             throw new RuntimeException(e);
         }
-
-        for (int i = 0; i < 100000; i++){
-            listaCopia.insertar(c.getNumero(), c);
-        }
-        
+  
         for (int i = 0; i < listaCopia.getArrayNodos().length; i++){
             listaArrayList.add(listaCopia.getArrayNodos()[i]);
         }
@@ -262,15 +262,15 @@ public class VisualizaJList extends javax.swing.JPanel {
     
     public void ordenarLista(){
         
-        long inicio, inicio2, fin, fin2, total, total2;
+        float inicio, inicio2, fin, fin2, total, total2;
 
         System.out.println("Inicio Lista.");
         
         inicio = System.nanoTime();
-        Arrays.sort(listaCopia.getArrayNodos());
+        Arrays.sort(listaCopia.getArrayNodos(), new ComparadorNumCuenta());
         fin = System.nanoTime();
         
-        total = fin - inicio / 1000000000;
+        total = (fin - inicio);
         
         System.out.println("Inicio ArrayList.");
         
@@ -278,7 +278,7 @@ public class VisualizaJList extends javax.swing.JPanel {
         Collections.sort(listaArrayList, new ComparadorNumCuenta());
         fin2 = System.nanoTime();
         
-        total2 = fin2 - inicio2 / 1000000000;
+        total2 = (fin2 - inicio2);
         
         for(int i = 0; i < listaCopia.getArrayNodos().length; i++){
             System.out.println((Cuenta) listaCopia.getArrayNodos()[i].getTypo());
@@ -288,8 +288,8 @@ public class VisualizaJList extends javax.swing.JPanel {
             System.out.println((Cuenta) listaArrayList.get(i).getTypo());
         }
         
-        System.out.printf("Tiempo en ordenar la Lista: %.2f segundos\n", total);
-        System.out.printf("Tiempo en ordenar el ArrayList: %.2f segundos\n", total2);
+        System.out.println("Tiempo en ordenar la Lista: " + total + " milisegundos.");
+        System.out.println("Tiempo en ordenar el ArrayList: " + total2 + " milisegundos.");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
