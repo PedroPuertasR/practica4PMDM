@@ -4,11 +4,11 @@
  */
 package vista;
 
-import controlador.ComparadorNumCuenta;
-import controlador.GestionFicheros;
-import controlador.Lista;
-import controlador.Nodo;
+import controlador.*;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -25,7 +25,8 @@ import modelo.CuentaInversion;
 public class VisualizaJList extends javax.swing.JPanel {
 
     private Lista listaNodos;
-    private List <Nodo> listaCopia;
+    private Lista listaCopia;
+    private List <Nodo> listaArrayList;
     private int indiceCuentaActual;
 
     /**
@@ -184,25 +185,11 @@ public class VisualizaJList extends javax.swing.JPanel {
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jButtonOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenarActionPerformed
-        
-        long total;
-        long inicio;
-        long fin;
-        
+
         copiarLista();
-        
-        inicio = System.nanoTime();
-        ordenarLista(listaCopia);
-        fin = System.nanoTime();
-        
-        total = (fin - inicio) / 1000000000;
-        
-        for(int i = 0; i < listaCopia.size(); i++){
-            System.out.println("Nº ");
-        }
-        
-        System.out.printf("Tiempo en ordenar la lista: %.2f segundos.", total);     
-        
+
+        ordenarLista();
+
     }//GEN-LAST:event_jButtonOrdenarActionPerformed
 
     private void mostrarCuentaSeleccionada() {
@@ -242,16 +229,63 @@ public class VisualizaJList extends javax.swing.JPanel {
         }
     }
 
+    private Calendar seteaCuenta(int d, int m, int y){
+        Calendar date = Calendar.getInstance();
+        date.set(Calendar.YEAR, y);
+        date.set(Calendar.MONTH, m+1);
+        date.set(Calendar.DAY_OF_MONTH, d);
+
+        return date;
+    }
+
     public void copiarLista(){
-        listaCopia = new ArrayList <Nodo>();
+        listaCopia = new Lista(100000);
+        listaArrayList = new ArrayList <Nodo>();
+        Calendar fecha;
+        fecha = seteaCuenta(18,4,2020);
+        Cuenta c;
         
-        for(Nodo n : listaNodos.getArrayNodos()){
-            listaCopia.add(n);
+        try {
+            c = new CuentaCorriente(0.2f, "anual", "Juan", 1865, 475, fecha);
+        } catch (ESaldoNoValido e) {
+            throw new RuntimeException(e);
+        }
+
+        for (int i = 0; i < 100000; i++){
+            listaCopia.insertar(c.getNumero(), c);
+        }
+        
+        for (int i = 0; i < listaCopia.getArrayNodos().length; i++){
+            listaArrayList.add(listaCopia.getArrayNodos()[i]);
         }
     }
     
-    public void ordenarLista(List <Nodo> lista){
-        Collections.sort(lista, new ComparadorNumCuenta());
+    public void ordenarLista(){
+        
+        long inicio, inicio2, fin, fin2, total, total2;
+
+        inicio = System.nanoTime();
+        listaCopia.setArrayNodos(Arrays.sort(listaCopia.getArrayNodos(), Collections.reverseOrder()));
+        fin = System.nanoTime();
+        
+        total = fin - inicio / 1000000000;
+        
+        inicio2 = System.nanoTime();
+        Collections.sort(listaArrayList, new ComparadorNumCuenta());
+        fin2 = System.nanoTime();
+        
+        total2 = fin2 - inicio2 / 1000000000;
+        
+        for(int i = 0; i < listaCopia.getArrayNodos().length; i++){
+            System.out.println((Cuenta) listaCopia.getArrayNodos()[i].getTypo());
+        }
+        
+        for(int i = 0; i < listaArrayList.size(); i++){
+            System.out.println((Cuenta) listaArrayList.get(i).getTypo());
+        }
+        
+        System.out.printf("Tiempo en ordenar la Lista: %.2f segundos\n", total);
+        System.out.printf("Tiempo en ordenar el ArrayList: %.2f segundos\n", total2);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
