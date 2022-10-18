@@ -239,14 +239,14 @@ public class VisualizaJList extends javax.swing.JPanel {
     }
 
     public void copiarLista(){
-        listaCopia = new Lista(1000);
+        listaCopia = new Lista(100000);
         listaArrayList = new ArrayList <Nodo>();
         Calendar fecha;
         fecha = seteaCuenta(18,4,2020);
         Cuenta c;
         
         try {
-            for (int i = 0; i < 1000; i++){
+            for (int i = 0; i < 100000; i++){
                 c = new CuentaCorriente(0.2f, "anual", "Juan", 1865, 475, fecha);
                 listaCopia.insertar(c.getNumero(), c);
             }
@@ -270,7 +270,7 @@ public class VisualizaJList extends javax.swing.JPanel {
         Arrays.sort(listaCopia.getArrayNodos(), new ComparadorNumCuenta());
         fin = System.nanoTime();
         
-        total = (fin - inicio);
+        total = (fin - inicio) / 1000000;
         
         System.out.println("Inicio ArrayList.");
         
@@ -278,7 +278,7 @@ public class VisualizaJList extends javax.swing.JPanel {
         Collections.sort(listaArrayList, new ComparadorNumCuenta());
         fin2 = System.nanoTime();
         
-        total2 = (fin2 - inicio2);
+        total2 = (fin2 - inicio2) / 1000000;
         
         for(int i = 0; i < listaCopia.getArrayNodos().length; i++){
             System.out.println((Cuenta) listaCopia.getArrayNodos()[i].getTypo());
