@@ -27,37 +27,9 @@ public class GestorDeCuentas extends javax.swing.JFrame {
      */
     public GestorDeCuentas() {
         listaNodo = new Lista(100);
-        //ordenarLista(listaCopia);
         initComponents();
 
-        Calendar fecha;
-        Cuenta c;
-        
-        try {
-            
-            fecha = seteaCuenta(18,10,2020);
-            c = new CuentaCorriente((float) 0.05, "semestral", "Pepito", 5634, 175, fecha);
-            listaNodo.insertar(c.getNumero(),c);
-            
-            fecha = seteaCuenta(18,7,2021);
-            c = new CuentaInversion(200, "Manu", 34523, 34, fecha);
-            listaNodo.insertar(c.getNumero(),c);
-            
-            fecha = seteaCuenta(18,10,2021);
-            c = new CuentaAhorro(0.1, false, "Ana", 6457, 745, fecha);
-            listaNodo.insertar(c.getNumero(),c);
-            
-            fecha = seteaCuenta(18,4,2020);
-            c = new CuentaCorriente((float) 0.2, "anual", "Juan", 1865, 475, fecha);
-            listaNodo.insertar(c.getNumero(),c);
-            
-            fecha = seteaCuenta(25, 9, 2022);   
-            c = new CuentaInversion(2000, "Alma", 3000, 100, fecha);
-            listaNodo.insertar(c.getNumero(), c);
-            
-        } catch (ESaldoNoValido ex) {
-            Logger.getLogger(GestorDeCuentas.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //creaCuentas();
     }
 
     /**
@@ -193,7 +165,6 @@ public class GestorDeCuentas extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemUnoAUnoActionPerformed
 
     private void jMenuItemJListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemJListActionPerformed
-        // TODO add your handling code here:
         if(jList==null){
             jList=new VisualizaJList(listaNodo);
         } else {
@@ -245,6 +216,37 @@ public class GestorDeCuentas extends javax.swing.JFrame {
         date.set(Calendar.DAY_OF_MONTH, d);
 
         return date;
+    }
+    
+    private void creaCuentas(){
+        Calendar fecha;
+        Cuenta c;
+        
+        try {
+            
+            fecha = seteaCuenta(18,10,2020);
+            c = new CuentaCorriente((float) 0.05, "semestral", "Pepito", 5634, 175, fecha);
+            listaNodo.insertar(c.getNumero(),c);
+            
+            fecha = seteaCuenta(18,7,2021);
+            c = new CuentaInversion(200, "Manu", 34523, 34, fecha);
+            listaNodo.insertar(c.getNumero(),c);
+            
+            fecha = seteaCuenta(18,10,2021);
+            c = new CuentaAhorro(0.1, false, "Ana", 6457, 745, fecha);
+            listaNodo.insertar(c.getNumero(),c);
+            
+            fecha = seteaCuenta(18,4,2020);
+            c = new CuentaCorriente((float) 0.2, "anual", "Juan", 1865, 475, fecha);
+            listaNodo.insertar(c.getNumero(),c);
+            
+            fecha = seteaCuenta(25, 9, 2022);   
+            c = new CuentaInversion(2000, "Alma", 3000, 100, fecha);
+            listaNodo.insertar(c.getNumero(), c);
+            
+        } catch (ESaldoNoValido ex) {
+            Logger.getLogger(GestorDeCuentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
