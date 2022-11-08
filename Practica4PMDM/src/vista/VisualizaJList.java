@@ -239,14 +239,14 @@ public class VisualizaJList extends javax.swing.JPanel {
     }
 
     public void copiarLista(){
-        listaCopia = new Lista(100000);
+        listaCopia = new Lista(1000);
         listaArrayList = new ArrayList <Nodo>();
         Calendar fecha;
         fecha = seteaCuenta(18,4,2020);
         Cuenta c;
         
         try {
-            for (int i = 0; i < 100000; i++){
+            for (int i = 0; i < 1000; i++){
                 c = new CuentaCorriente(0.2f, "anual", "Juan", 1865, 475, fecha);
                 listaCopia.insertar(c.getNumero(), c);
             }

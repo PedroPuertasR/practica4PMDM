@@ -5,12 +5,14 @@
 
 package vista;
 
+import controlador.ESaldoNoValido;
 import controlador.GestionFicheros;
 import controlador.Lista;
 import controlador.Nodo;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
+import javax.swing.JOptionPane;
 import modelo.*;
 
 /**
@@ -21,7 +23,7 @@ public class Visualiza1a1 extends javax.swing.JPanel {
 
     private Lista listaNodo;
     private int posicion;
-    DecimalFormat dc = new DecimalFormat("0.00");
+    // DecimalFormat dc = new DecimalFormat("0.00");
     
     /** Creates new form NuevaCuenta */
     public Visualiza1a1(Lista listanodo) {
@@ -201,14 +203,19 @@ public class Visualiza1a1 extends javax.swing.JPanel {
                                          
         Nodo nodo = listaNodo.getArrayNodos()[posicion];
         long meses;
-        
         if (nodo.getTypo() instanceof CuentaAhorro) {
             CuentaAhorro ahorro = (CuentaAhorro) nodo.getTypo();
             meses = diasTranscurridos(ahorro.getFecha()) / 30;
             ahorro.setSaldo(((ahorro.getSaldo() * ahorro.getInteresMensual()) * meses) + ahorro.getSaldo());
-            jTextFieldSaldoActual.setText(String.valueOf(dc.format(ahorro.getSaldo())));
-            listaNodo.getArrayNodos()[posicion].setTypo(ahorro);
-            
+
+            try {
+                calculaExcecion(ahorro.getSaldo(), ahorro.getSaldoMinimo());
+                jTextFieldSaldoActual.setText(String.valueOf(ahorro.getSaldo()));
+                listaNodo.getArrayNodos()[posicion].setTypo(ahorro);
+            } catch (ESaldoNoValido e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+
         } else if (nodo.getTypo() instanceof CuentaCorriente) {
             CuentaCorriente corriente = (CuentaCorriente) nodo.getTypo();
             meses = diasTranscurridos(corriente.getFecha()) / 30;
@@ -217,18 +224,26 @@ public class Visualiza1a1 extends javax.swing.JPanel {
             }else{
                 corriente.setSaldo(corriente.getSaldo() - ((corriente.getSaldo() * corriente.getComisionMantenimiento()) * meses / 12));
             }
-            
-            jTextFieldSaldoActual.setText(String.valueOf(dc.format(corriente.getSaldo())));
-            listaNodo.getArrayNodos()[posicion].setTypo(corriente);
+            try {
+                calculaExcecion(corriente.getSaldo(), corriente.getSaldoMinimo());
+                jTextFieldSaldoActual.setText(String.valueOf(corriente.getSaldo()));
+                listaNodo.getArrayNodos()[posicion].setTypo(corriente);
+            } catch (ESaldoNoValido e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+
         } else {
             CuentaInversion inversion = (CuentaInversion) nodo.getTypo();
             meses = diasTranscurridos(inversion.getFecha()) / 30;
             inversion.setSaldo(((inversion.getSaldo() * inversion.getBeneficio()) * meses / 3) + inversion.getSaldo());
-            jTextFieldSaldoActual.setText(String.valueOf(dc.format(inversion.getSaldo())));
-
-            listaNodo.getArrayNodos()[posicion].setTypo(inversion);
+            try {
+                calculaExcecion(inversion.getSaldo(), inversion.getSaldoMinimo());
+                jTextFieldSaldoActual.setText(String.valueOf(inversion.getSaldo()));
+                listaNodo.getArrayNodos()[posicion].setTypo(inversion);
+            } catch (ESaldoNoValido e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         }
-        
     }//GEN-LAST:event_jButtonCalcularActionPerformed
 
 
@@ -287,27 +302,32 @@ public class Visualiza1a1 extends javax.swing.JPanel {
         
         jTextFieldFecha.setText(GestionFicheros.formateaFecha(c.getFecha()));
         jTextFieldNumeroCuenta.setText(c.getNumero()+"");
-        jTextFieldSaldoActual.setText(dc.format(c.getSaldo())+"");
+//        jTextFieldSaldoActual.setText(dc.format(c.getSaldo())+"");
+        jTextFieldSaldoActual.setText(c.getSaldo()+"");
+//        jTextFieldSaldoMinimo.setText(dc.format(c.getSaldoMinimo())+"");
         jTextFieldSaldoMinimo.setText(c.getSaldoMinimo()+"");
         jTextFieldTitular.setText(c.getTitular());
         
         if (c instanceof CuentaAhorro) {
             CuentaAhorro cuenta = (CuentaAhorro) c;
-            jTextFieldTipo1.setText(dc.format(cuenta.getInteresMensual())+"");
+//            jTextFieldTipo1.setText(dc.format(cuenta.getInteresMensual())+"");
+            jTextFieldTipo1.setText(cuenta.getInteresMensual()+"");
             jTextFieldTipo2.setText(cuenta.isBloqueada()+"");
             
             jButtonCalcular.setEnabled(diasTranscurridos(c.getFecha()) > 30);
         } else {
             if (c instanceof CuentaCorriente) {
                 CuentaCorriente cuenta = (CuentaCorriente) c;
-                jTextFieldTipo1.setText(dc.format(cuenta.getComisionMantenimiento())+"");
+//                jTextFieldTipo1.setText(dc.format(cuenta.getComisionMantenimiento())+"");
+                jTextFieldTipo1.setText(cuenta.getComisionMantenimiento()+"");
                 jTextFieldTipo2.setText(cuenta.getTipoComision());
                 jButtonCalcular.setEnabled(diasTranscurridos(c.getFecha()) > 180);
 
             } else {
                 if(c instanceof CuentaInversion){
                     CuentaInversion cuenta = (CuentaInversion) c;
-                    jTextFieldTipo1.setText(dc.format(cuenta.getBeneficio())+"");
+//                    jTextFieldTipo1.setText(dc.format(cuenta.getBeneficio())+"");
+                    jTextFieldTipo1.setText(cuenta.getBeneficio()+"");
                     jTextFieldTipo2.setText(cuenta.getTotalInvertido()+"");
                     jButtonCalcular.setEnabled(diasTranscurridos(c.getFecha()) > 90);
                 }
@@ -331,6 +351,14 @@ public class Visualiza1a1 extends javax.swing.JPanel {
         long end = fechaCuenta.getTimeInMillis();
         long start = Calendar.getInstance().getTimeInMillis();
         return TimeUnit.MILLISECONDS.toDays(Math.abs(end - start));
+    }
+
+    private void calculaExcecion(double f1, double f2) throws ESaldoNoValido{
+        if(f1 < f2)
+        {
+            System.out.println("hola111");
+            throw new ESaldoNoValido("El saldo no puede ser menor que saldoMinimo");
+        }
     }
     
 }
